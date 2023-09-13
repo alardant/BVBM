@@ -1,6 +1,6 @@
-﻿using BVBM.Models;
+﻿using BVBM.API.Models;
 
-namespace BVBM.Interface
+namespace BVBM.API.Interface
 {
     public interface IReviewRepository
     {

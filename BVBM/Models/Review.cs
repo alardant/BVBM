@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BVBM.Models
+namespace BVBM.API.Models
 {
     public class Review
     {
@@ -10,7 +10,7 @@ namespace BVBM.Models
         public  DateTime CreatedDate { get; set; }
         public Package Package { get; set; }
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
     }

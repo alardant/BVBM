@@ -1,99 +1,49 @@
-﻿using BVBM.Interface;
-using BVBM.Models;
-using BVBM.Repository;
-using BVBM_API.Dto;
-using BVBM_API.Interface;
+﻿using BVBM.API.Dto;
+using BVBM.API.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.Data;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 
-namespace BVBM_API.Controllers
+namespace BVBM.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
-        private readonly IConfiguration _config;
-        //private readonly IUserRepository _userRepository;
+        private readonly IAuthService _authService;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IAuthService authService)
         {
-            _config = configuration;
+            _authService = authService;
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto userDto)
+        [HttpPost("Register")]
+        public async Task<IActionResult> RegisterUser(UserDto userDto)
         {
-            CreatePasswordHash(userDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            var result = await _authService.RegisterUser(userDto);
 
-            user.Username = userDto.Username;  
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            return Ok(user);
-        }
-
-        [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto userDto)
-        {
-            if(user.Username != userDto.Username)
+            if (!result)
             {
-                return BadRequest("Utilisateur non trouvé.");
+                return BadRequest("Échec de la création de l'utilisateur");
             }
 
-            if(!VerifyPasswordHash(userDto.Password, user.PasswordHash, user.PasswordSalt)) 
-            {
-                return BadRequest("Mauvais mot de passe.");
-            }
-
-            string token = CreateToken(user);
-            return Ok(token);
+            return Ok(result);
         }
 
-        private string CreateToken(User user)
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(UserDto userDto) 
         {
-            List<Claim> claims = new List<Claim>
+            if(!ModelState.IsValid)
             {
-                new Claim(ClaimTypes.Name, user.Username)
-            };
-
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                _config.GetSection("AppSettings:Key").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(15),
-                signingCredentials: creds
-                );
-
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return jwt;
-        }
-
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash);
+                return BadRequest("Échec de l'identification de l'utilisateur");
             }
-        }
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt) 
-        { 
-            using(var hmac = new HMACSHA512())
+            var result = await _authService.Login(userDto);
+            if (result == true)
             {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                var tokenString = _authService.GenerateTokenString(userDto);
+                return Ok(tokenString);
             }
+            return BadRequest();
         }
     }
 }

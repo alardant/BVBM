@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BVBM.Migrations
+namespace BVBM.API.Migrations
 {
     public partial class AddForeignKeysToReview : Migration
     {

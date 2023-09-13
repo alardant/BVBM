@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BVBM.Migrations
+namespace BVBM.API.Migrations
 {
     public partial class InitialCreate : Migration
     {

@@ -1,9 +1,9 @@
-﻿using BVBM.Data;
-using BVBM.Interface;
-using BVBM.Models;
+﻿using BVBM.API.Data;
+using BVBM.API.Interface;
+using BVBM.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BVBM.Repository
+namespace BVBM.API.Repository
 {
     public class ReviewRepository : IReviewRepository
     {

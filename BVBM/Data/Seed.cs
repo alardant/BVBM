@@ -1,9 +1,9 @@
-﻿using BVBM.Models;
+﻿using BVBM.API.Models;
 using System.Diagnostics.Metrics;
 
 // *** To delete upon Deployment ***
 
-namespace BVBM.Data
+namespace BVBM.API.Data
 {
     public class Seed
     {

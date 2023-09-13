@@ -1,11 +1,11 @@
-﻿using BVBM.Dto;
-using BVBM.Interface;
-using BVBM.Models;
+﻿using BVBM.API.Dto;
+using BVBM.API.Interface;
+using BVBM.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
 
-namespace BVBM.Controllers
+namespace BVBM.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

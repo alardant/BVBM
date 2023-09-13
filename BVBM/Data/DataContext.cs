@@ -1,9 +1,10 @@
-﻿using BVBM.Models;
+﻿using BVBM.API.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BVBM.Data
+namespace BVBM.API.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) 
         { 

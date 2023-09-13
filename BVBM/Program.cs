@@ -1,7 +1,9 @@
-using BVBM.Data;
-using BVBM.Interface;
-using BVBM.Repository;
+using BVBM.API.Data;
+using BVBM.API.Interface;
+using BVBM.API.Repository;
+using BVBM.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -12,36 +14,55 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-//Set up JWT tokens and authentification
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//   .AddJwtBearer(options =>
-//   {
-//       options.TokenValidationParameters = new TokenValidationParameters
-//       {
-//           ValidateIssuer = true,
-//           ValidateAudience = true,
-//           ValidateLifetime = true,
-//           ValidateIssuerSigningKey = true,
-//           ValidIssuer = builder.Configuration["Jwt:Issuer"],
-//           ValidAudience = builder.Configuration["Jwt:Audience"],
-//           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-//       };
-//   });
+
+// Set Connection to DB
+builder.Services.AddDbContext<DataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+//Set Identity config
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+    {
+        options.Password.RequiredLength = 5;
+        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
+        options.SignIn.RequireConfirmedPhoneNumber = false;
+
+    }).AddEntityFrameworkStores<DataContext>()
+    .AddDefaultTokenProviders();
+
+//Set Jwt Token
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme=JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme=JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options=>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateActor = true,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        RequireExpirationTime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Value,
+        ValidAudience = builder.Configuration.GetSection("Jwt:Audience").Value,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Key").Value))
+    };
+});
+
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+
 
 // *** Seed the DB (to delete after delpoyment) ***
 builder.Services.AddTransient<Seed>();
+builder.Services.AddTransient<IAuthService, AuthService>();
 
-builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Set Connection to DB
-builder.Services.AddDbContext<DataContext>(options=>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
 
 var app = builder.Build();
 

@@ -1,9 +1,13 @@
-﻿namespace BVBM_API.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BVBM.API.Dto
 {
     public class UserDto
     {
-        public int Id { get; set; }
-        public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 }
