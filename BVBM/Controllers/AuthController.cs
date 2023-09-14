@@ -40,8 +40,7 @@ namespace BVBM.API.Controllers
             var result = await _authService.Login(userDto);
             if (result == true)
             {
-                var tokenString = _authService.GenerateTokenString(userDto);
-                Console.WriteLine(3);
+                var tokenString = await _authService.GenerateTokenString(userDto);
 
                 return Ok(tokenString);
             }

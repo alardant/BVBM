@@ -71,7 +71,6 @@ namespace BVBM.API.Services
             }
 
             var storedHashedJwtKey = jwtSecret.SecretKeyHash;
-            Console.WriteLine(1);
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(storedHashedJwtKey));
 
             //Create the credential to sign the token
@@ -88,7 +87,6 @@ namespace BVBM.API.Services
 
             //Transform token into string
             string tokenString = new JwtSecurityTokenHandler().WriteToken(securityToken);
-            Console.WriteLine(2);
             return tokenString;
 
         }
