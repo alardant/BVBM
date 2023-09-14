@@ -41,6 +41,8 @@ namespace BVBM.API.Controllers
             if (result == true)
             {
                 var tokenString = _authService.GenerateTokenString(userDto);
+                Console.WriteLine(3);
+
                 return Ok(tokenString);
             }
             return BadRequest();
