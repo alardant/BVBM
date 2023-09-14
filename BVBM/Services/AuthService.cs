@@ -1,7 +1,11 @@
-﻿using BVBM.API.Dto;
+﻿using BVBM.API.Data;
+using BVBM.API.Dto;
 using BVBM.API.Interface;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Data.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -12,32 +16,33 @@ namespace BVBM.API.Services
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _config;
-
-        public AuthService(UserManager<IdentityUser> userManager, IConfiguration configuration)
+        private readonly DataContext _context;
+        public AuthService(UserManager<IdentityUser> userManager, IConfiguration configuration, DataContext context)
         {
             _userManager = userManager;
             _config = configuration;
+            _context = context;
         }
 
         //Register a new user
-        public async Task<bool> RegisterUser(UserDto user)
+        public async Task<bool> RegisterUser(UserDto userDto)
         {
             var identityUser = new IdentityUser
             {
-                Email = user.Email,
-                UserName = user.Email,
+                Email = userDto.Email,
+                UserName = userDto.Email,
             };
 
             //Create this user in the database
-            var result = await _userManager.CreateAsync(identityUser, user.Password);
+            var result = await _userManager.CreateAsync(identityUser, userDto.Password);
             return result.Succeeded;
         }
 
         // Checl the credential of the user upon Login
-        public async Task<bool> Login(UserDto user)
+        public async Task<bool> Login(UserDto userDto)
         {
-            //Search for suer with the email
-            var identityUser = await _userManager.FindByEmailAsync(user.Email);
+            //Search for user with the email
+            var identityUser = await _userManager.FindByEmailAsync(userDto.Email);
 
             if (identityUser == null)
             {
@@ -45,11 +50,11 @@ namespace BVBM.API.Services
             }
 
             // Check if the password is correct
-            return await _userManager.CheckPasswordAsync(identityUser, user.Password);
+            return await _userManager.CheckPasswordAsync(identityUser, userDto.Password);
         }
 
         //Generate a JWT token
-        public string GenerateTokenString(UserDto userDto)
+        public async Task<string> GenerateTokenString(UserDto userDto)
         {
             //Create the claims for the user
             var claims = new List<Claim>
@@ -58,7 +63,15 @@ namespace BVBM.API.Services
             };
 
             // get the security Key
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value));
+            var jwtSecret= await _context.JwtSecrets.FirstOrDefaultAsync();
+
+            if (jwtSecret == null)
+            {
+                throw new Exception("Data not found.");
+            }
+
+            var storedHashedJwtKey = jwtSecret.SecretKeyHash;
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(storedHashedJwtKey));
 
             //Create the credential to sign the token
             var signingCred = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
@@ -74,8 +87,8 @@ namespace BVBM.API.Services
 
             //Transform token into string
             string tokenString = new JwtSecurityTokenHandler().WriteToken(securityToken);
-
             return tokenString;
+
         }
     }
 }
