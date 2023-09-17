@@ -24,20 +24,6 @@ namespace BVBM.API.Services
             _context = context;
         }
 
-        //Register a new user
-        public async Task<bool> RegisterUser(UserDto userDto)
-        {
-            var identityUser = new IdentityUser
-            {
-                Email = userDto.Email,
-                UserName = userDto.Email,
-            };
-
-            //Create this user in the database
-            var result = await _userManager.CreateAsync(identityUser, userDto.Password);
-            return result.Succeeded;
-        }
-
         // Checl the credential of the user upon Login
         public async Task<bool> Login(UserDto userDto)
         {

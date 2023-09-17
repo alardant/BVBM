@@ -16,19 +16,6 @@ namespace BVBM.API.Controllers
             _authService = authService;
         }
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> RegisterUser(UserDto userDto)
-        {
-            var result = await _authService.RegisterUser(userDto);
-
-            if (!result)
-            {
-                return BadRequest("Échec de la création de l'utilisateur");
-            }
-
-            return Ok(result);
-        }
-
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserDto userDto) 
         {
