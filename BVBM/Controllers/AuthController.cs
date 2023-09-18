@@ -1,6 +1,9 @@
 ﻿using BVBM.API.Dto;
 using BVBM.API.Interface;
+using BVBM.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BVBM.API.Controllers
@@ -10,10 +13,12 @@ namespace BVBM.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, SignInManager<User> signInManager)
         {
             _authService = authService;
+            _signInManager = signInManager;
         }
 
         [HttpPost("Login")]
@@ -32,6 +37,14 @@ namespace BVBM.API.Controllers
                 return Ok(tokenString);
             }
             return BadRequest();
+        }
+
+        [Authorize]
+        [HttpGet("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok();
         }
     }
 }
