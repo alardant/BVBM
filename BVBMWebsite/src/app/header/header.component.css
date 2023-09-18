@@ -9,7 +9,7 @@
 }
 
 .imageHeaderContainer {
-  height: 200px;
+  height: 180px;
   width: 100%;
   position: relative;
 }
@@ -30,8 +30,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 7vw;
-  text-wrap: nowrap;
+  font-size: 6vw;
+  white-space: nowrap;
 }
 
 .nav-item h3 {
@@ -49,9 +49,11 @@
   }
 }
 
-
-
 .custom-toggler.navbar-toggler {
   border-color: #F7CC84;
+}
+
+header{
+    margin-bottom:2rem;
 }
 
