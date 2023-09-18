@@ -10,7 +10,6 @@ namespace BVBM.API.Dto
         [Required]
         public string Email { get; set; }
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
         public string Phone { get; set; }
         [Required]
         public string Subject { get; set; }
