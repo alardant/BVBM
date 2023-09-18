@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #444444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "nickainley", sans-serif;
+}
+
+h2 {
+  font-size: 26px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+a {
+  color: #444444!important;
+}
+
+a:hover{
+    cursor:pointer;
+}
