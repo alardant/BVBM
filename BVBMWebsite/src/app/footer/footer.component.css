@@ -7,9 +7,6 @@
 
 footer {
   text-align: center;
-  position: absolute;
-  bottom: 0;
-  width:100%;
 }
 
 .container-fluid{
@@ -34,4 +31,12 @@ footer {
     .container-fluid{
         flex-direction:column;
     }
+}
+
+.navbar-toggler:focus{
+    box-shadow:unset;
+}
+
+a {
+  text-decoration: none;
 }

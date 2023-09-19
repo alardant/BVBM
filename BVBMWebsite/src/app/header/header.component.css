@@ -9,7 +9,7 @@
 }
 
 .imageHeaderContainer {
-  height: 180px;
+  height: 160px;
   width: 100%;
   position: relative;
 }
@@ -30,12 +30,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 6vw;
+  font-size: 5vw;
   white-space: nowrap;
 }
 
 .nav-item h3 {
-  margin-bottom: unset;
+  padding: unset;
 }
 
 .navbar{
