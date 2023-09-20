@@ -1,0 +1,52 @@
+.container {
+  text-align: center;
+}
+
+.quote {
+    padding:2rem;
+}
+
+  .quote * {
+    font-weight: bold;
+    padding:unset;
+  }
+
+  .quote>h2{
+      padding-bottom:1rem;
+  }
+
+.mission-container {
+  background-color: #F8F1E4;
+}
+
+.mission {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+  .mission p {
+    width: 80%;
+  }
+
+.offers-container {
+  text-align: center;
+}
+
+.offers-container h2 {
+  font-weight: 400;
+}
+
+.free-call {
+  border: 2px solid #ECEBBD;
+  border-radius: 30px;
+}
+
+  .free-call h3 {
+    font-weight: bold;
+  }
+
+.offers-card-container {
+  display: flex;
+  align-items:stretch !important;
+}

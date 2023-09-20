@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: Nickainley;
+  src: url(assets/font/Nickainley-Normal.otf) format("opentype");
+}
+
 * {
   box-sizing: border-box;
 }
@@ -22,8 +27,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "nickainley", sans-serif;
-  padding:2rem;
+  font-family: "Nickainley", sans-serif;
+  padding: 2rem;
+  margin-bottom: unset;
 }
 
 h2 {
@@ -50,4 +56,8 @@ a:hover{
 p {
     margin:unset;
     padding-bottom:1rem;
+}
+
+.container {
+  min-width: 95% !important;
 }

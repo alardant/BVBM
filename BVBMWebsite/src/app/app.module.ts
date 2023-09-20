@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './Components/Shared/header/header.component';
+import { FooterComponent } from './Components/Shared/footer/footer.component';
+import { ButtonComponent } from './Components/Shared/button/button.component';
+import { HomeComponent } from './Components/home/home.component';
+import { HomeOfferComponent } from './Components/home-offer/home-offer.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { ButtonComponent } from './button/button.component';
+
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ButtonComponent } from './button/button.component';
     FooterComponent,
     HomeComponent,
     ButtonComponent,
+    HomeOfferComponent,
   ],
   imports: [
     BrowserModule,

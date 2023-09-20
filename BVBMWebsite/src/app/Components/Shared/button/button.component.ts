@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 
 export class ButtonComponent {
-  public buttonText = '';
+  @Input() buttonText!:string
 
   @Input()
   set text(name: string) {
@@ -17,13 +17,15 @@ export class ButtonComponent {
     return this.buttonText;
   }
 
-  @Input() color: string = '0068B4';
-  @Input() type: string = 'button';
   @Output() btnClick = new EventEmitter();
 
   constructor() { }
 
   onClick() {
     this.btnClick.emit();
+  }
+
+  ngOnInit()  {
+
   }
 }
