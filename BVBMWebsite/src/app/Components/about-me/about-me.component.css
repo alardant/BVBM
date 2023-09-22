@@ -9,7 +9,8 @@
 }
 
 .about-me {
-  display: flex;
+  display: grid;
+  grid-template-columns:2fr 3fr;
   gap: 2rem;
   padding:1rem;
   align-items:center;
