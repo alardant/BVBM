@@ -1,0 +1,39 @@
+* {
+  text-align: center;
+}
+
+.about-me-section {
+  background-color: #F8F1E4;
+  margin-bottom:2rem;
+  margin-top:2rem;
+}
+
+.about-me {
+  display: flex;
+  gap: 2rem;
+  padding:1rem;
+  align-items:center;
+}
+
+@media (max-width: 767px){
+  .about-me {
+    display:block;
+  }
+}
+.about-me-image-container {
+  max-height:400px;
+  width:100%;
+  overflow:hidden;
+  border:1rem solid #ffffffff;
+}
+
+.about-me-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.origin-section {
+  background-color: #F7CC8480;
+  padding: 0 2rem 2rem 2rem;
+}

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReviewService } from '../../Services/Review/review.service';
-import { Review } from '../../Models/review';
-import { Package } from '../../Enum/packageEnum';
+import { Review } from '../../../Models/review';
+import { ReviewService } from '../../../Services/Review/review.service';
+import { Package } from '../../../Enum/packageEnum';
 
 @Component({
   selector: 'app-home',

@@ -1,0 +1,13 @@
+<section>
+  <h2 [style.backgroundColor]="backgroundColor" >{{title}}</h2>
+    <div class="offer-body container">
+      <div class="offer-image-summary">
+        <div class="offer-img-container" style="background-size: cover; background-position-x:50%; background: url('{{imageUrl}}')"></div>
+          <p [style.backgroundColor]="backgroundColor" class="offer-summary">{{summary}}</p>
+      </div>
+      <div class="offer-description-price">
+        <p class="offer-description">{{description}}</p>
+        <p class="price" [style.backgroundColor]="backgroundColor">{{price}}</p>
+      </div>
+    </div>
+</section>
