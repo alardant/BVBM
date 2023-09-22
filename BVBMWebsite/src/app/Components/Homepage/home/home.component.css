@@ -47,8 +47,17 @@
   }
 
 .offers-card-container {
-  display: flex;
+  display: grid;
   align-items:stretch !important;
+  grid-template-columns:repeat(3, 1fr);
+  gap:2%;
+}
+
+@media (max-width: 767px) {
+  .offers-card-container {
+    grid-template-columns: 1fr;
+    gap:2rem;
+  }
 }
 
 .reviews-container {
