@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 export class ButtonComponent {
   @Input() buttonText!:string
+  @Input() backgroundColor!: string;
 
   @Input()
   set text(name: string) {

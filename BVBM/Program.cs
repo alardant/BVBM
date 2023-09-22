@@ -73,6 +73,14 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        //deal with Cors
+        //*** (to delete after deployment))
+        builder.Services.AddCors(options => options.AddPolicy(name: "BVBMOrigins",
+            policy =>
+            {
+                policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+            }));
+
         var app = builder.Build();
 
         // *** Seed the DB (to delete after deployment) ***
@@ -98,6 +106,9 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        //*** to delete in prod env
+        app.UseCors("BVBMOrigins");
 
         app.UseHttpsRedirection();
 

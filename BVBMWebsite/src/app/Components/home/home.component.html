@@ -1,7 +1,7 @@
-<div class="quote container">
+<section class="quote container">
   <h2><q>Que ton alimentation soit ta première médecine</q></h2>
   <h2>Hippocrate</h2>
-</div>
+</section>
 
 <div class="mission-container">
   <div class="mission container">
@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<div class="offers-container container">
+<section class="offers-container container">
   <h2>Ce que je vous propose</h2>
   <div class="free-call">
     <h3>Appel découverte GRATUIT de 15 minutes :</h3>
@@ -63,8 +63,30 @@
       </app-home-offer>
     </div>
   </div>
-  <app-button (btnClick)="redirectToContact" text="En savoir +"></app-button>
+  <app-button (btnClick)="redirectToContact" text="En savoir +"></app-button>           
+</section>
 
-</div>
-
+<section class="reviews-container">
+  <div class="container">
+    <h2>Témoignages</h2>
+    <div id="review-carousel" class="carousel slide" data-bs-interval="false" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let review of reviews; let i = index" [ngClass]="{active: i === 0}">
+          <q>{{review.description}}</q>
+          <p>{{review.name}}, {{getPackageName(review.package)}}</p>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#review-carousel" data-bs-slide="prev">
+          <span class="bi bi-arrow-left" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#review-carousel" data-bs-slide="next">
+          <span class="bi bi-arrow-right" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <app-button (btnClick)="redirectToContact" backgroundColor="#ffffff" text="Laisser votre avis ici"></app-button>
+    <a class="see-all-reviews" href="/" target="_blank">Voir tous les avis ici</a>
+  </div>
+</section>
 

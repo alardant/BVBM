@@ -50,3 +50,35 @@
   display: flex;
   align-items:stretch !important;
 }
+
+.reviews-container {
+  background-color: #F8F1E4;
+  text-align:center;
+  position:relative;
+  padding-bottom:1rem;
+}
+
+.carousel p{
+    margin-top:1rem;
+}
+
+.bi-arrow-left, .bi-arrow-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  font-size: 3em;
+  color: #444444;
+  height: 30px;
+  background-color: #F8F1E4;
+  border-radius: 50px;
+  opacity: 0.8;
+}
+
+.see-all-reviews {
+  text-decoration: underline;
+  position: absolute;
+  right: 5%;
+  bottom: 1rem;
+  font-style:italic;
+}

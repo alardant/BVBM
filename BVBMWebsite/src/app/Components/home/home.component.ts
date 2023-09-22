@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ReviewService } from '../../Services/Review/review.service';
+import { Review } from '../../Models/review';
+import { Package } from '../../Enum/packageEnum';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +11,29 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  constructor(private router: Router) { }
+  reviews: Review[] = [];
+  packages = Package;
+
+  constructor(private router: Router, private reviewService: ReviewService) { }
+
   redirectToContact() {
     this.router.navigate(['/']);
   }
 
-  ngOnInit() {
-    
+  ngOnInit(): void {
+    this.reviewService.getReviews().subscribe((result: Review[]) => (this.reviews = result));
+  }
+
+   getPackageName(packageValue: Package): string {
+    switch (packageValue) {
+      case Package.ConsultationIndividuelle:
+        return 'Consultation Individuelle';
+      case Package.Pack3mois:
+        return 'Pack 3 mois';
+      case Package.ConsultationDomicile:
+        return 'Consultation à domicile';
+      default:
+        return '';
+    }
   }
 }

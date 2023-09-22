@@ -6,6 +6,6 @@ public enum Package
     ConsultationIndividuelle,
     [Display(Name = "Pack 3 mois")]
     Pack3mois,
-    [Display(Name = "frigo futé")]
-    Frigofuté
+    [Display(Name = "Consultation à domicile")]
+    ConsultationDomicile
 }

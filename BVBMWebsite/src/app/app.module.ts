@@ -7,6 +7,7 @@ import { ButtonComponent } from './Components/Shared/button/button.component';
 import { HomeComponent } from './Components/home/home.component';
 import { HomeOfferComponent } from './Components/home-offer/home-offer.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http'; 
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -57,6 +57,9 @@ p {
     margin:unset;
     padding-bottom:1rem;
 }
+q {
+    font-style:italic;
+}
 
 .container {
   min-width: 95% !important;
