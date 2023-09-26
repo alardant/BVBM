@@ -13,6 +13,5 @@ namespace BVBM.API.Data
 
         public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<JwtSecret> JwtSecrets { get; set; }
     }
 }

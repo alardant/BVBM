@@ -16,12 +16,10 @@ namespace BVBM.API.Services
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _config;
-        private readonly DataContext _context;
         public AuthService(UserManager<IdentityUser> userManager, IConfiguration configuration, DataContext context)
         {
             _userManager = userManager;
             _config = configuration;
-            _context = context;
         }
 
         // Checl the credential of the user upon Login
@@ -48,16 +46,7 @@ namespace BVBM.API.Services
                 new Claim(ClaimTypes.Email,userDto.Email)
             };
 
-            // get the security Key
-            var jwtSecret= await _context.JwtSecrets.FirstOrDefaultAsync();
-
-            if (jwtSecret == null)
-            {
-                throw new Exception("Data not found.");
-            }
-
-            var storedHashedJwtKey = jwtSecret.SecretKeyHash;
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(storedHashedJwtKey));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value));
 
             //Create the credential to sign the token
             var signingCred = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);

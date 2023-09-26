@@ -16,18 +16,6 @@ namespace BVBM.API.Data
             _context = context;
         }
 
-        public async Task SeedJwt()
-        {
-            if (!_context.JwtSecrets.Any())
-            {
-                string originalSecretKey = "E2C42061-7964-43B0-B936-0E072BF03553";
-                string hashedSecretKey = HashSecretKey(originalSecretKey);
-
-                _context.JwtSecrets.Add(new JwtSecret { SecretKeyHash = hashedSecretKey });
-                _context.SaveChanges();
-            }
-        }
-
         private string HashSecretKey(string secretKey)
         {
             using (var sha256 = SHA256.Create()) // Use a secure hashing algorithm

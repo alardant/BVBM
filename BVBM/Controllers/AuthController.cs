@@ -1,6 +1,5 @@
 ﻿using BVBM.API.Dto;
 using BVBM.API.Interface;
-using BVBM.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -13,9 +12,9 @@ namespace BVBM.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly SignInManager<User> _signInManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AuthController(IAuthService authService, SignInManager<User> signInManager)
+        public AuthController(IAuthService authService, SignInManager<IdentityUser> signInManager)
         {
             _authService = authService;
             _signInManager = signInManager;
