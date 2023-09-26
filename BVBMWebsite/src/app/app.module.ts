@@ -12,6 +12,7 @@ import { HomeOfferComponent } from './Components/Homepage/home-offer/home-offer.
 import { OffersComponent } from './Components/Offerpage/offers/offers.component';
 import { ContactComponent } from './Components/contact/contact.component';
 import { OffersOfferComponent } from './Components/Offerpage/offers-offer/offers-offer.component';
+import { ReviewsComponent } from './Components/reviews/reviews.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { OffersOfferComponent } from './Components/Offerpage/offers-offer/offers
     ContactComponent,
     HomeComponent,
     OffersOfferComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,

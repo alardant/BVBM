@@ -18,15 +18,19 @@ namespace BVBM.API.Repository
             return await _context.Reviews.OrderByDescending(i => i.CreatedDate).ToListAsync();
         }
 
+        public async Task<ICollection<Review>> GetAllReviewsValidatedAsync()
+        {
+            return await _context.Reviews.Where(i => i.IsValidated == true).OrderByDescending(i => i.CreatedDate).ToListAsync();
+        }
+
+        public async Task<ICollection<Review>> GetAllReviewsNotValidatedAsync()
+        {
+            return await _context.Reviews.Where(i => i.IsValidated == false).OrderByDescending(i => i.CreatedDate).ToListAsync();
+        }
+
         public async Task<Review> GetReviewByIdAsync(int id)
         {
             return await _context.Reviews.FirstOrDefaultAsync(i => i.Id == id);
-        }
-
-        public bool CreateReview(Review review)
-        {
-            _context.Add(review);
-            return Save();
         }
 
         public bool Save()
@@ -51,7 +55,6 @@ namespace BVBM.API.Repository
         {
             return _context.Reviews.Any(c => c.Id == id);
         }
-
 
     }
     }

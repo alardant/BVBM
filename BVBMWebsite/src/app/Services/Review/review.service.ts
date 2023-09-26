@@ -7,11 +7,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReviewService {
+  //Tochange when deployed
   private apiurl = "https://localhost:7267/api"
-  private url = "Review"
+  private urlAllReviews = "Review"
+  private urlReviewsValidated = "Review/Validated"
+  private urlReviewsNotValidated = "Review/NotValidated"
+  private urlValidate = "Review/Validate";
   constructor(private http: HttpClient) { }
 
   public getReviews(): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.apiurl}/${this.url}`)
-;  }
+    return this.http.get<Review[]>(`${this.apiurl}/${this.urlAllReviews}`);
+  }
+
+  public getReviewsValidated(): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.apiurl}/${this.urlReviewsValidated}`);
+  }
+
+  public getReviewsNotValidated(): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.apiurl}/${this.urlReviewsNotValidated}`);
+  }
+
+  public validateReview(reviewId: number): Observable<string> {
+    return this.http.put(`${this.apiurl}/${this.urlValidate}/${reviewId}`, {}, { responseType: 'text' });
+  }
 }

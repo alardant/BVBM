@@ -17,7 +17,11 @@ export class HomeComponent {
   constructor(private router: Router, private reviewService: ReviewService) { }
 
   redirectToContact() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/contact']);
+  }
+
+  redirectToOffers() {
+    this.router.navigate(['/offres-et-tarifs']);
   }
 
   ngOnInit(): void {

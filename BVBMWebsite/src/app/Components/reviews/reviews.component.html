@@ -1,0 +1,46 @@
+<div class="response-message container" [ngStyle]="{'color': responseMessage.includes('Erreur') ? 'red' : 'green'}">
+  {{ responseMessage }}
+</div>
+
+<h2>Témoignages non validés</h2>
+<table class="container">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Description</th>
+      <th>Commentaire validé</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let review of unvalidatedReviews">
+      <td>{{ review.name }}</td>
+      <td>{{ review.description }}</td>
+      <td>Non</td>
+      <td class="buttons">
+        <app-button (btnClick)="validateReview(review)" text="Valider"></app-button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Témoignages validés</h2>
+<table class="container">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Description</th>
+      <th>Commentaire validé</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let review of validatedReviews">
+      <td>{{ review.name }}</td>
+      <td>{{ review.description }}</td>
+      <td>Oui</td>
+      <td>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -17,95 +17,99 @@ namespace BVBM.API.Controllers
             _reviewRepository = reviewRepository;
         }
 
-        //Get all reviews
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Review>))]
-        public async Task<IActionResult> getAllReviews()
+        public async Task<IActionResult> GetAllReviews()
         {
             var reviews = await _reviewRepository.GetAllReviewsAsync();
             return Ok(reviews);
         }
 
-        //Create a review
-        [Authorize]
-        [HttpPost]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> CreateReview([FromBody] ReviewDto reviewCreate)
+        [HttpGet("Validated")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Review>))]
+        public async Task<IActionResult> GetReviewsValidated()
         {
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var review = new Review
-                {
-                    Description = reviewCreate.Description,
-                    Name = reviewCreate.Name,
-                    CreatedDate = DateTime.Now,
-                    Package = reviewCreate.Package,
-                    UserId = reviewCreate.UserId,
-                    IsValidated = reviewCreate.IsValidated
-                };
-
-                _reviewRepository.CreateReview(review);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "Échec de la création du commentaire. Veuillez réessayer");
-                return StatusCode(500, ModelState);
-            }
-
-            return Ok("Le commentaire a bien été crée !");
+            var reviews = await _reviewRepository.GetAllReviewsValidatedAsync();
+            return Ok(reviews);
         }
 
-
-        //Update a review
-        [Authorize]
-        [HttpPut("{id}")]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(404)]
-        public async Task<IActionResult> UpdateReview(int id, [FromBody] ReviewDto reviewUpdate)
+        [HttpGet("NotValidated")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Review>))]
+        public async Task<IActionResult> GetReviewsNotValidatedAsync()
         {
-            if (reviewUpdate == null)
-                return BadRequest(ModelState);
+            var reviews = await _reviewRepository.GetAllReviewsNotValidatedAsync();
+            return Ok(reviews);
+        }
 
-            if (id != reviewUpdate.Id)
-                return BadRequest(ModelState);
-
-            if (!_reviewRepository.ReviewExists(id))
-                return NotFound();
-
-            if (!ModelState.IsValid)
-                return BadRequest();
-
+        [HttpPut("Validate/{id}")]
+        public async Task<IActionResult> ValidateReview(int id)
+        {
             var review = await _reviewRepository.GetReviewByIdAsync(id);
 
-            try
+            if (!ModelState.IsValid)
             {
-                review.Description = reviewUpdate.Description;
-                review.Name = reviewUpdate.Name;
-                review.CreatedDate = reviewUpdate.CreatedDate;
-                review.Package = reviewUpdate.Package;
-                review.UserId = reviewUpdate.UserId;
-
-                _reviewRepository.UpdateReview(review);
-            } catch
-            {
-                ModelState.AddModelError("", "Échec de la modification du commentaire. Veuillez réessayer");
-                return StatusCode(500, ModelState);
+                return BadRequest(ModelState);
             }
 
-            return Ok("Le commentaire a bien été modifié !");
+            if(!_reviewRepository.ReviewExists(id))
+            {
+                throw new Exception("Commentaire non trouvé");
+            }
+
+            try
+            {
+                review.IsValidated = true;
+                _reviewRepository.UpdateReview(review);
+                return Ok(new { message = "Le commentaire a bien été validé !" });
+            } catch (Exception ex)
+           {
+                return Ok(new { message = "Erreur lors de la validation du commentaire. Veuillez ressayer" });
+            }
         }
 
-        //Delete de Review
-        [Authorize]
-        [HttpDelete("{id}")]
+
+            ////Update a review
+            //[Authorize]
+            //[HttpPut("{id}")]
+            //[ProducesResponseType(400)]
+            //[ProducesResponseType(204)]
+            //[ProducesResponseType(404)]
+            //public async Task<IActionResult> UpdateReview(int id, [FromBody] ReviewDto reviewUpdate)
+            //{
+            //    if (reviewUpdate == null)
+            //        return BadRequest(ModelState);
+
+            //    if (id != reviewUpdate.Id)
+            //        return BadRequest(ModelState);
+
+            //    if (!_reviewRepository.ReviewExists(id))
+            //        return NotFound();
+
+            //    if (!ModelState.IsValid)
+            //        return BadRequest();
+
+            //    var review = await _reviewRepository.GetReviewByIdAsync(id);
+
+            //    try
+            //    {
+            //        review.Description = reviewUpdate.Description;
+            //        review.Name = reviewUpdate.Name;
+            //        review.CreatedDate = reviewUpdate.CreatedDate;
+            //        review.Package = reviewUpdate.Package;
+            //        review.UserId = reviewUpdate.UserId;
+
+            //        _reviewRepository.UpdateReview(review);
+            //    } catch
+            //    {
+            //        ModelState.AddModelError("", "Échec de la modification du commentaire. Veuillez réessayer");
+            //        return StatusCode(500, ModelState);
+            //    }
+
+            //    return Ok("Le commentaire a bien été modifié !");
+            //}
+
+            //Delete de Review
+        [HttpDelete("delete/{id}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -126,13 +130,13 @@ namespace BVBM.API.Controllers
             try
             {
                 _reviewRepository.DeleteReview(reviewToDelete);
-            } catch (Exception ex) 
-            {
-                ModelState.AddModelError("", "Échec de la suppression du commentaire. Veuillez réessayer");
+                return Ok(new { message = "Le commentaire a bien été validé !" });
+
             }
-
-            return Ok("Le commentaire a bien été supprimé !");
-
+            catch (Exception ex) 
+            {
+                return Ok(new { message = "Erreur lors de la suppression du commentare. Veuillez ressayer" });
+            }
         }
 
     }

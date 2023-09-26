@@ -25,7 +25,7 @@
     <p>Ne laissez pas vos questions en suspens, reservez dès maintenant votre appel découverte gratuit.</p>
   </div>
 
-  <app-button (btnClick)="redirectToContact" text="Me Contacter"></app-button>
+  <app-button (btnClick)="redirectToContact()" text="Me Contacter"></app-button>
 
   <div class="offers-card-container">
 
@@ -60,7 +60,7 @@
       </app-home-offer>
     
   </div>
-  <app-button (btnClick)="redirectToContact" text="En savoir +"></app-button>           
+  <app-button (btnClick)="redirectToOffers()" text="En savoir +"></app-button>           
 </section>
 
 <section class="reviews-container">

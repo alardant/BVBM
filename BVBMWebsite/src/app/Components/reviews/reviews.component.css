@@ -1,0 +1,29 @@
+h2{
+    margin-top:2rem;
+    text-align:center
+}
+
+tr{
+    display:grid;
+    grid-template-columns:1fr 2fr 1fr 1fr;
+    align-items:center;
+    justify-content:center;
+}
+  tbody tr:nth-child(odd) {
+    background-color: #ECEBBD;
+  }
+
+thead, tbody{
+    text-align:center;
+}
+
+.buttons{
+    display:flex;
+    gap:1rem;
+    justify-content:center;
+}
+
+.response-message{
+    padding-top:1rem;
+    text-decoration:underline;
+}
