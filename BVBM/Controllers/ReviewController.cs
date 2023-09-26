@@ -47,8 +47,8 @@ namespace BVBM.API.Controllers
                     Name = reviewCreate.Name,
                     CreatedDate = DateTime.Now,
                     Package = reviewCreate.Package,
-                    UserId = reviewCreate.UserId
-
+                    UserId = reviewCreate.UserId,
+                    IsValidated = reviewCreate.IsValidated
                 };
 
                 _reviewRepository.CreateReview(review);
