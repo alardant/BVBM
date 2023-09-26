@@ -11,7 +11,7 @@ import { Package } from '../../../Enum/packageEnum';
 })
 export class HomeComponent {
 
-  reviews: Review[] = [];
+  validatedReviews: Review[] = [];
   packages = Package;
 
   constructor(private router: Router, private reviewService: ReviewService) { }
@@ -25,7 +25,7 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.reviewService.getReviews().subscribe((result: Review[]) => (this.reviews = result));
+    this.reviewService.getReviewsValidated().subscribe((result: Review[]) => (this.validatedReviews = result));
   }
 
    getPackageName(packageValue: Package): string {

@@ -13,6 +13,8 @@ export class ReviewService {
   private urlReviewsValidated = "Review/Validated"
   private urlReviewsNotValidated = "Review/NotValidated"
   private urlValidate = "Review/Validate";
+  private urlUnvalidate = "Review/UnvalidateReview";
+
   constructor(private http: HttpClient) { }
 
   public getReviews(): Observable<Review[]> {
@@ -29,5 +31,9 @@ export class ReviewService {
 
   public validateReview(reviewId: number): Observable<string> {
     return this.http.put(`${this.apiurl}/${this.urlValidate}/${reviewId}`, {}, { responseType: 'text' });
+  }
+
+  public unvalidateReview(reviewId: number): Observable<string> {
+    return this.http.put(`${this.apiurl}/${this.urlUnvalidate}/${reviewId}`, {}, { responseType: 'text' });
   }
 }

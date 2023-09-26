@@ -31,4 +31,17 @@ export class ReviewsComponent {
       this.validatedReviews.push(review);
     });
   }
+
+  unvalidateReview(review: Review) {
+    this.reviewService.unvalidateReview(review.id).subscribe((response: string) => {
+      if (response) {
+        // Stocke la réposne dans une variable de composant pour l'afficher dans la vue
+        this.responseMessage = response;
+      }
+      // Met à jour la liste des reviews validés    
+      this.validatedReviews = this.validatedReviews.filter(r => r !== review);
+      // Met à jour la liste des reviews non-validées
+      this.unvalidatedReviews.push(review);
+    });
+  }
 }

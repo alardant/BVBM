@@ -48,22 +48,22 @@ namespace BVBM.API.Controllers
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return Ok("Erreur lors de la validation du commentaire. Veuillez réessayer");
             }
 
-            if(!_reviewRepository.ReviewExists(id))
+            if (!_reviewRepository.ReviewExists(id))
             {
-                throw new Exception("Commentaire non trouvé");
+                return Ok("Erreur lors de la validation du commentaire, commentaire introuvable. Veuillez réessayer");
             }
 
             try
             {
                 review.IsValidated = true;
                 _reviewRepository.UpdateReview(review);
-                return Ok(new { message = "Le commentaire a bien été validé !" });
+                return Ok("Le commentaire a bien été validé !");
             } catch (Exception ex)
            {
-                return Ok(new { message = "Erreur lors de la validation du commentaire. Veuillez ressayer" });
+                return Ok("Erreur lors de la validation du commentaire. Veuillez réessayer");
             }
         }
 
@@ -108,34 +108,31 @@ namespace BVBM.API.Controllers
             //    return Ok("Le commentaire a bien été modifié !");
             //}
 
-            //Delete de Review
-        [HttpDelete("delete/{id}")]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(404)]
-        public async Task<IActionResult> DeleteReview(int id)
+
+        [HttpPut("UnvalidateReview/{id}")]
+        public async Task<IActionResult> UnvalidateReview(int id)
         {
-            if (!_reviewRepository.ReviewExists(id))
-            {
-                return NotFound();
-                }
+            var review = await _reviewRepository.GetReviewByIdAsync(id);
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return Ok("Erreur lors de la suppression du commentaire. Veuillez réessayer.");
             }
 
-            var reviewToDelete = await _reviewRepository.GetReviewByIdAsync(id);
+            if (!_reviewRepository.ReviewExists(id))
+            {
+                return Ok("Erreur lors de la suppression du commentaire, commentaire introuvable. Veuillez réessayer.");
+            }
 
             try
             {
-                _reviewRepository.DeleteReview(reviewToDelete);
-                return Ok(new { message = "Le commentaire a bien été validé !" });
-
+                review.IsValidated = false;
+                _reviewRepository.UpdateReview(review);
+                return Ok("Le commentaire a bien été supprimé !");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                return Ok(new { message = "Erreur lors de la suppression du commentare. Veuillez ressayer" });
+                return Ok("Erreur lors de la suppression du commentaire. Veuillez réessayer.");
             }
         }
 

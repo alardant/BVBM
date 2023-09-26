@@ -1,28 +1,6 @@
-<div class="response-message container" [ngStyle]="{'color': responseMessage.includes('Erreur') ? 'red' : 'green'}">
+<div class="response-message container" [ngStyle]="{'color': responseMessage.includes('bien été validé') ? 'green' : 'red'}">
   {{ responseMessage }}
 </div>
-
-<h2>Témoignages non validés</h2>
-<table class="container">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Description</th>
-      <th>Commentaire validé</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let review of unvalidatedReviews">
-      <td>{{ review.name }}</td>
-      <td>{{ review.description }}</td>
-      <td>Non</td>
-      <td class="buttons">
-        <app-button (btnClick)="validateReview(review)" text="Valider"></app-button>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
 <h2>Témoignages validés</h2>
 <table class="container">
@@ -30,7 +8,7 @@
     <tr>
       <th>Nom</th>
       <th>Description</th>
-      <th>Commentaire validé</th>
+      <th class="validation">Commentaire validé</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -38,8 +16,31 @@
     <tr *ngFor="let review of validatedReviews">
       <td>{{ review.name }}</td>
       <td>{{ review.description }}</td>
-      <td>Oui</td>
+      <td class="validation">Oui</td>
       <td>
+        <app-button (btnClick)="unvalidateReview(review)" text="Supprimer"></app-button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Témoignages non validés</h2>
+<table class="container">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Description</th>
+      <th class="validation">Commentaire validé</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let review of unvalidatedReviews">
+      <td>{{ review.name }}</td>
+      <td>{{ review.description }}</td>
+      <td class="validation">Non</td>
+      <td class="buttons">
+        <app-button (btnClick)="validateReview(review)" text="Valider"></app-button>
       </td>
     </tr>
   </tbody>

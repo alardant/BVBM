@@ -67,8 +67,8 @@
   <div class="container">
     <h2>Témoignages</h2>
     <div id="review-carousel" class="carousel slide" data-bs-interval="false" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let review of reviews; let i = index" [ngClass]="{active: i === 0}">
+      <div class="carousel-inner" *ng>
+        <div class="carousel-item" *ngFor="let review of validatedReviews; let i = index" [ngClass]="{active: i === 0}">
           <q>{{review.description}}</q>
           <p>{{review.name}}, {{getPackageName(review.package)}}</p>
         </div>

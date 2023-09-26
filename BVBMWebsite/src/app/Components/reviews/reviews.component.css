@@ -9,9 +9,24 @@ tr{
     align-items:center;
     justify-content:center;
 }
-  tbody tr:nth-child(odd) {
-    background-color: #ECEBBD;
+
+@media (max-width: 575px) {
+  tr {
+    grid-template-columns: 1fr 1fr 1fr;
   }
+
+  .validation{
+      display:none;
+  }
+}
+
+td:not(:last-child) {
+  padding: 1rem;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ECEBBD;
+}
 
 thead, tbody{
     text-align:center;
