@@ -35,7 +35,7 @@ namespace BVBM.API.Controllers
 
                 return Ok(tokenString);
             }
-            return BadRequest();
+            return BadRequest("Échec de l'identification de l'utilisateur");
         }
 
         [Authorize]

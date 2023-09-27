@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Review } from '../../../Models/review';
 import { ReviewService } from '../../../Services/Review/review.service';
 import { Package } from '../../../Enum/packageEnum';
+import { UserService } from '../../../Services/User/user.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   reviews: Review[] = [];
   packages = Package;
 
-  constructor(private router: Router, private reviewService: ReviewService) { }
+  constructor(private router: Router, private reviewService: ReviewService, private userService: UserService) { }
 
   redirectToContact() {
     this.router.navigate(['/contact']);

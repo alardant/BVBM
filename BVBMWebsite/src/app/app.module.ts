@@ -14,6 +14,7 @@ import { ContactComponent } from './Components/contact/contact.component';
 import { OffersOfferComponent } from './Components/Offerpage/offers-offer/offers-offer.component';
 import { ReviewsComponent } from './Components/Reviewpage/reviews/reviews.component';
 import { LoginComponent } from './Components/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { LoginComponent } from './Components/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
