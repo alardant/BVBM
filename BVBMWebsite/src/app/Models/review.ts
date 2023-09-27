@@ -7,5 +7,4 @@ export class Review {
   createdDate!: Date;
   package!: Package;
   userId!: string;
-  isValidated!: boolean;
 }

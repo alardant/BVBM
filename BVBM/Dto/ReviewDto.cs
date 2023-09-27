@@ -15,8 +15,6 @@ namespace BVBM.API.Dto
         [Required]
         public Package Package { get; set; }
         [Required]
-        public bool IsValidated { get; set; }
-        [Required]
         public string UserId { get; set; }
         
     }

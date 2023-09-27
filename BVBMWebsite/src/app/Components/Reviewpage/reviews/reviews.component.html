@@ -1,0 +1,30 @@
+<div class="response-message container"
+     [ngStyle]="{'color': responseMessage.includes('bien été') ? 'green' : 'red', 'display': responseMessage ? 'block' : 'none'}">
+  {{ responseMessage }}
+</div>
+
+<div class="create-review">
+  <button (click)="redirectToCreateReview()">Créer un témoignage</button>
+</div>
+
+<h2>Témoignages</h2>
+<table class="container">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let review of reviews">
+      <td>{{ review.name }}</td>
+      <td>{{ review.description }}</td>
+      <td>
+        <!--<app-button (btnClick)="redirectToUpdateReview(review.id)" text="Modifier"></app-button>
+        <app-button (btnClick)="DeleteReview()" text="Supprimer"></app-button>-->
+      </td>
+    </tr>
+  </tbody>
+</table>
+

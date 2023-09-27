@@ -3,9 +3,13 @@ h2{
     text-align:center
 }
 
+thead tr{
+    padding-bottom:1rem;
+}
+
 tr{
     display:grid;
-    grid-template-columns:1fr 2fr 1fr 1fr;
+    grid-template-columns:1fr 2fr 1fr;
     align-items:center;
     justify-content:center;
 }
@@ -42,3 +46,17 @@ thead, tbody{
     padding-top:1rem;
     text-decoration:underline;
 }
+
+.create-review {
+  float: right;
+  padding-right: 10%;
+  padding-top:1rem;
+}
+
+button {
+  border-radius: 30px;
+  padding: 0.5rem;
+  background-color: inherit;
+  border: 2px solid #ECEBBD;
+}
+

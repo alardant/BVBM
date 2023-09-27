@@ -8,32 +8,27 @@ import { Observable } from 'rxjs';
 })
 export class ReviewService {
   //Tochange when deployed
-  private apiurl = "https://localhost:7267/api"
-  private urlAllReviews = "Review"
-  private urlReviewsValidated = "Review/Validated"
-  private urlReviewsNotValidated = "Review/NotValidated"
-  private urlValidate = "Review/Validate";
-  private urlUnvalidate = "Review/UnvalidateReview";
+  private apiurl = "https://localhost:7267/api/Review"
+  private urlCreateReview = "Create"
+  private urlUpdateReview = "Update"
+  private urlDeleteReview = "Delete"
+
 
   constructor(private http: HttpClient) { }
 
-  public getReviews(): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.apiurl}/${this.urlAllReviews}`);
+  public GetAllReviews(): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.apiurl}`);
   }
 
-  public getReviewsValidated(): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.apiurl}/${this.urlReviewsValidated}`);
+  public CreateReview(): Observable<string> {
+    return this.http.post(`${this.apiurl}/${this.urlCreateReview}`, {}, { responseType: 'text' });
   }
 
-  public getReviewsNotValidated(): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.apiurl}/${this.urlReviewsNotValidated}`);
+  public UdpateReview(reviewId: number): Observable<string> {
+    return this.http.put(`${this.apiurl}/${this.urlUpdateReview}/${reviewId}`, {},  { responseType: 'text' });
   }
 
-  public validateReview(reviewId: number): Observable<string> {
-    return this.http.put(`${this.apiurl}/${this.urlValidate}/${reviewId}`, {}, { responseType: 'text' });
-  }
-
-  public unvalidateReview(reviewId: number): Observable<string> {
-    return this.http.put(`${this.apiurl}/${this.urlUnvalidate}/${reviewId}`, {}, { responseType: 'text' });
+  public DeleteReview(reviewId: number): Observable<string> {
+    return this.http.delete(`${this.apiurl}/${this.urlDeleteReview}/${reviewId}`, { responseType: 'text' });
   }
 }

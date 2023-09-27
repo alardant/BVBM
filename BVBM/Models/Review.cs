@@ -8,8 +8,7 @@ namespace BVBM.API.Models
         public string Description { get; set; }
         public string Name { get; set; }
         public  DateTime CreatedDate { get; set; }
-        public Package Package { get; set; }
-        public bool IsValidated { get; set; } = false;
+        public Package? Package { get; set; }
         [ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }

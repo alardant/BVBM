@@ -1,7 +1,7 @@
 using BVBM.API.Data;
 using BVBM.API.Interface;
-using BVBM.API.Repository;
 using BVBM.API.Services;
+using BVBM.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -89,7 +89,7 @@ void SeedData(IHost app)
     {
         var service = scope.ServiceProvider.GetService<Seed>();
         // Supprimer ces 
-        service.SeedDataContext();
+        service.SeedDataContext().Wait();
     }
 }
 
