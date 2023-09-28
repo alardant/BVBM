@@ -6,5 +6,6 @@ namespace BVBM.API.Interface
     {
         Task<bool> Login(UserDto userDto);
         Task<string> GenerateTokenString(UserDto userDto);
+        Task<bool> IsLoggedIn();
     }
 }

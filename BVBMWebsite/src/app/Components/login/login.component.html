@@ -1,9 +1,15 @@
+<div class="container">
+  <div *ngIf="responseMessage !== ''" class="info-message">
+    {{responseMessage}}
+  </div>
+</div>
+
 <section class="container login-container">
   <h2>Connexion</h2>
   <form (ngSubmit)="login()">
     <div class="form-group">
       <label for="username">Nom d'utilisateur</label>
-      <input type="text" id="email" name="email" class="form-control" [(ngModel)]="user.email" required>
+      <input type="text" id="email" name="email" class="form-control" [(ngModel)]="user.email" required autocomplete="username">
     </div>
     <div class="form-group">
       <label for="password">Mot de passe</label>

@@ -21,7 +21,6 @@ export class ReviewService {
   }
 
   public CreateReview(review: Review): Observable<string> {
-    console.log(review);
     return this.http.post(`${this.apiurl}/${this.urlCreateReview}`, review, { responseType: 'text' });
   }
 

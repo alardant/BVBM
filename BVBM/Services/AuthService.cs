@@ -16,13 +16,15 @@ namespace BVBM.API.Services
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _config;
-        public AuthService(UserManager<IdentityUser> userManager, IConfiguration configuration, DataContext context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AuthService(UserManager<IdentityUser> userManager, IConfiguration configuration, DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _config = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        // Checl the credential of the user upon Login
+        // Check the credential of the user upon Login
         public async Task<bool> Login(UserDto userDto)
         {
             //Search for user with the email
@@ -53,17 +55,22 @@ namespace BVBM.API.Services
 
             //Create token
             var securityToken = new JwtSecurityToken(
-                claims:claims,
-                expires:DateTime.Now.AddMinutes(60),
-                issuer:_config.GetSection("Jwt:Issuer").Value,
-                audience:_config.GetSection("Jwt:Audience").Value,
-                signingCredentials:signingCred
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(15),
+                issuer: _config.GetSection("Jwt:Issuer").Value,
+                audience: _config.GetSection("Jwt:Audience").Value,
+                signingCredentials: signingCred
                 );
 
             //Transform token into string
             string tokenString = new JwtSecurityTokenHandler().WriteToken(securityToken);
             return tokenString;
 
+        }
+
+        public async Task<bool> IsLoggedIn()
+        {
+            return await Task.FromResult(_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated);
         }
     }
 }

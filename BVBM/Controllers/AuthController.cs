@@ -38,8 +38,15 @@ namespace BVBM.API.Controllers
             return BadRequest("Échec de l'identification de l'utilisateur");
         }
 
+        [HttpGet("LoggedIn")]
+        public async Task<bool> IsLoggedIn()
+        {
+            var isLoggedIn = await _authService.IsLoggedIn();
+            return isLoggedIn;
+        }
+
         [Authorize]
-        [HttpGet("Logout")]
+        [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

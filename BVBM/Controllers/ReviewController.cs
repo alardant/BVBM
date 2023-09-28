@@ -30,6 +30,7 @@ namespace BVBM.Controllers
         }
 
         //Create a review
+        [Authorize]
         [HttpPost("Create")]
         public async Task<IActionResult> CreateReview([FromBody] ReviewDto reviewCreate)
         {

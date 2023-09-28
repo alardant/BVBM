@@ -7,14 +7,15 @@ import { HomeComponent } from './Components/Homepage/home/home.component';
 import { ReviewsComponent } from './Components/Reviewpage/reviews/reviews.component';
 import { CreateReviewComponent } from './Components/Reviewpage/create-review/create-review.component';
 import { LoginComponent } from './Components/login/login.component';
+import { AuthGuard } from './Guard/auth.guard';
 
 const routes: Routes = [
   { path: 'offres-et-tarifs', component: OffersComponent },
   { path: 'login', component: LoginComponent },
   { path: 'a-propos', component: AboutMeComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'reviews', component: ReviewsComponent },
-  { path: 'create-review', component: CreateReviewComponent },
+  { path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard] },
+  { path: 'create-review', component: CreateReviewComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ];
