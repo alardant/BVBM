@@ -2,10 +2,14 @@ h2 {
   text-align: center;
 }
 
-.form-group:nth-of-type(2) {
+.form-group {
   margin-bottom: 1rem;
 }
 
 .form-group:last-of-type {
   float: right;
+}
+
+.return-to-list-button{
+    float:right;
 }

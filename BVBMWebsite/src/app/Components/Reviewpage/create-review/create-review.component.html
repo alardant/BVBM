@@ -7,22 +7,31 @@
   </div>
 </div>
 
+<div class="container">
+  <div class="return-to-list-button">
+    <app-button [buttonText]="'Retour à la liste'" (btnClick)="redirectToListofReview()"></app-button>
+  </div>
+</div>
+
 <section class="container create-review-container">
   <h2>Créer un commentaire</h2>
-  <form (ngSubmit)="createReview()">
+  <form (ngSubmit)="createReview()" #reviewForm="ngForm">
     <div class="form-group">
       <label for="name">Nom</label>
       <input type="text" id="name" name="name" class="form-control" [(ngModel)]="review.name" required>
+      <div class="error-message" *ngIf="nameError">{{ nameError }}</div>
     </div>
     <div class="form-group">
       <label for="package">Package</label>
       <select id="package" name="package" class="form-control" [(ngModel)]="review.package" required>
         <option *ngFor="let package of packageValues" [ngValue]="package">{{ getPackageName(package) }}</option>
       </select>
+      <div class="error-message" *ngIf="packageError">{{ packageError }}</div>
     </div>
     <div class="form-group">
       <label for="description">Description</label>
       <textarea id="description" name="description" class="form-control" [(ngModel)]="review.description" required rows="4"></textarea>
+      <div class="error-message" *ngIf="descriptionError">{{ descriptionError }}</div>
     </div>
     <div class="form-group">
       <app-button [buttonText]="'Créer'" (btnClick)="createReview()"></app-button>

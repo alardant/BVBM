@@ -14,7 +14,7 @@ import { ContactComponent } from './Components/contact/contact.component';
 import { OffersOfferComponent } from './Components/Offerpage/offers-offer/offers-offer.component';
 import { ReviewsComponent } from './Components/Reviewpage/reviews/reviews.component';
 import { LoginComponent } from './Components/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './Interceptor/jwt.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { CreateReviewComponent } from './Components/Reviewpage/create-review/create-review.component';
@@ -41,7 +41,7 @@ import { CreateReviewComponent } from './Components/Reviewpage/create-review/cre
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule, 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
