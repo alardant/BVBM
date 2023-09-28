@@ -5,7 +5,7 @@ import { HeaderComponent } from './Components/Shared/header/header.component';
 import { FooterComponent } from './Components/Shared/footer/footer.component';
 import { ButtonComponent } from './Components/Shared/button/button.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AboutMeComponent } from './Components/about-me/about-me.component';
 import { HomeComponent } from './Components/Homepage/home/home.component';
 import { HomeOfferComponent } from './Components/Homepage/home-offer/home-offer.component';
@@ -15,6 +15,8 @@ import { OffersOfferComponent } from './Components/Offerpage/offers-offer/offers
 import { ReviewsComponent } from './Components/Reviewpage/reviews/reviews.component';
 import { LoginComponent } from './Components/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { JwtInterceptor } from './Interceptor/jwt.interceptor';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -31,7 +33,7 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     OffersOfferComponent,
     ReviewsComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,10 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    CookieService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
