@@ -27,8 +27,8 @@
           <li class="nav-item" *ngIf="isLoggedIn">
             <a class="nav-link" routerLink="/reviews"><h3>Commentaires</h3></a>
           </li>
-          <li *ngIf="isLoggedIn">
-            <button (click)="Logout()">Déconnexion</button>
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link" (click)="Logout()"><h3>Déconnexion</h3></a>
           </li>
         </ul>
       </div>
