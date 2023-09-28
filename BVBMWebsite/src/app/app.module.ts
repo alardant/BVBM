@@ -17,6 +17,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { JwtInterceptor } from './Interceptor/jwt.interceptor';
 import { CookieService } from 'ngx-cookie-service';
+import { CreateReviewComponent } from './Components/Reviewpage/create-review/create-review.component';
 
 
 @NgModule({
@@ -34,12 +35,13 @@ import { CookieService } from 'ngx-cookie-service';
     OffersOfferComponent,
     ReviewsComponent,
     LoginComponent,
+    CreateReviewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

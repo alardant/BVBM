@@ -1,5 +1,6 @@
 using BVBM.API.Data;
 using BVBM.API.Interface;
+using BVBM.API.Repository;
 using BVBM.API.Services;
 using BVBM.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -56,6 +57,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 // *** Seed the DB (to delete after delpoyment) ***

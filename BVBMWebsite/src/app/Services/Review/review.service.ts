@@ -20,12 +20,13 @@ export class ReviewService {
     return this.http.get<Review[]>(`${this.apiurl}`);
   }
 
-  public CreateReview(): Observable<string> {
-    return this.http.post(`${this.apiurl}/${this.urlCreateReview}`, {}, { responseType: 'text' });
+  public CreateReview(review: Review): Observable<string> {
+    console.log(review);
+    return this.http.post(`${this.apiurl}/${this.urlCreateReview}`, review, { responseType: 'text' });
   }
 
   public UdpateReview(reviewId: number): Observable<string> {
-    return this.http.put(`${this.apiurl}/${this.urlUpdateReview}/${reviewId}`, {},  { responseType: 'text' });
+    return this.http.put(`${this.apiurl}/${this.urlUpdateReview}/${reviewId}`, reviewId,  { responseType: 'text' });
   }
 
   public DeleteReview(reviewId: number): Observable<string> {

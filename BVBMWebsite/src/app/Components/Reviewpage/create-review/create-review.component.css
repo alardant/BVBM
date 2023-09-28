@@ -1,0 +1,11 @@
+h2 {
+  text-align: center;
+}
+
+.form-group:nth-of-type(2) {
+  margin-bottom: 1rem;
+}
+
+.form-group:last-of-type {
+  float: right;
+}

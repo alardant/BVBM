@@ -1,6 +1,7 @@
 ﻿using BVBM.API.Dto;
 using BVBM.API.Interface;
 using BVBM.API.Models;
+using BVBM.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
@@ -12,9 +13,11 @@ namespace BVBM.Controllers
     public class ReviewController : Controller
     {
         private readonly IReviewRepository _reviewRepository;
-        public ReviewController(IReviewRepository reviewRepository)
+        private readonly IUserRepository _userRepository;
+        public ReviewController(IReviewRepository reviewRepository, IUserRepository userRepository)
         {
             _reviewRepository = reviewRepository;
+            _userRepository = userRepository;
         }
 
         //Get all reviews
@@ -27,7 +30,6 @@ namespace BVBM.Controllers
         }
 
         //Create a review
-        [Authorize]
         [HttpPost("Create")]
         public async Task<IActionResult> CreateReview([FromBody] ReviewDto reviewCreate)
         {
@@ -45,7 +47,7 @@ namespace BVBM.Controllers
                     Name = reviewCreate.Name,
                     CreatedDate = DateTime.Now,
                     Package = reviewCreate.Package,
-                    UserId = reviewCreate.UserId
+                    UserId = _userRepository.GetFirstUser().Id
                 };
 
                 _reviewRepository.CreateReview(review);
@@ -75,9 +77,9 @@ namespace BVBM.Controllers
             {
                 review.Description = reviewUpdate.Description;
                 review.Name = reviewUpdate.Name;
-                review.CreatedDate = reviewUpdate.CreatedDate;
+                review.CreatedDate = DateTime.Now;
                 review.Package = reviewUpdate.Package;
-                review.UserId = reviewUpdate.UserId;
+                review.UserId = _userRepository.GetFirstUser().Id;
 
                 _reviewRepository.UpdateReview(review);
             }

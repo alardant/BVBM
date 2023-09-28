@@ -1,1 +1,31 @@
-<p>create-review works!</p>
+<div class="container">
+  <div *ngIf="responseMessage === 'success'" class="info-message">
+    Le témoignage a été créé avec succès !
+  </div>
+  <div *ngIf="responseMessage === 'fail'" class="info-message">
+    Une erreur s'est produite lors de la création du témoignage.
+  </div>
+</div>
+
+<section class="container create-review-container">
+  <h2>Créer un commentaire</h2>
+  <form (ngSubmit)="createReview()">
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input type="text" id="name" name="name" class="form-control" [(ngModel)]="review.name" required>
+    </div>
+    <div class="form-group">
+      <label for="package">Package</label>
+      <select id="package" name="package" class="form-control" [(ngModel)]="review.package" required>
+        <option *ngFor="let package of packageValues" [ngValue]="package">{{ getPackageName(package) }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" class="form-control" [(ngModel)]="review.description" required rows="4"></textarea>
+    </div>
+    <div class="form-group">
+      <app-button [buttonText]="'Créer'" (btnClick)="createReview()"></app-button>
+    </div>
+  </form>
+</section>
