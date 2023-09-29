@@ -19,6 +19,7 @@ import { JwtInterceptor } from './Interceptor/jwt.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { CreateReviewComponent } from './Components/Reviewpage/create-review/create-review.component';
 import { UpdateReviewComponent } from './Components/Reviewpage/update-review/update-review.component';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -43,7 +44,9 @@ import { UpdateReviewComponent } from './Components/Reviewpage/update-review/upd
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

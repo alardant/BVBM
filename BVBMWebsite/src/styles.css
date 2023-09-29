@@ -74,7 +74,6 @@ q {
 
 .error-message {
   color: #e10000;
-  text-decoration: underline;
 }
 
 input:focus, select:focus, textarea:focus {
