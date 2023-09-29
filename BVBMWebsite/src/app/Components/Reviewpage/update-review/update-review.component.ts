@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Review } from '../../../Models/review';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Package } from '../../../Enum/packageEnum';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-update-review',
@@ -18,7 +19,7 @@ export class UpdateReviewComponent implements OnInit {
   packageError: string = '';
   descriptionError: string = '';
 
-  constructor(private reviewService: ReviewService, private hhtp: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private reviewService: ReviewService, private hhtp: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private viewportScroller: ViewportScroller) {
     
   }
 
@@ -60,10 +61,13 @@ export class UpdateReviewComponent implements OnInit {
       this.reviewService.UdpateReview(this.review.id, this.review).subscribe(
         (result: string) => {
           this.responseMessage = 'success';
-          this.router.navigate(['/update-review/:id}']);
+          this.viewportScroller.scrollToPosition([0, 0]);
+
         },
         (error: string) => {
           this.responseMessage = 'fail';
+          this.viewportScroller.scrollToPosition([0, 0]);
+
         }
       );
     }

@@ -1,6 +1,10 @@
-<div class="response-message container"
-     [ngStyle]="{'color': responseMessage.includes('bien été') ? 'green' : 'red', 'display': responseMessage ? 'block' : 'none'}">
-  {{ responseMessage }}
+<div class="container">
+  <div *ngIf="responseMessage === 'success'" class="info-message">
+    Le témoignage a été créé avec supprimé !
+  </div>
+  <div *ngIf="responseMessage === 'fail'" class="info-message">
+    Une erreur s'est produite lors de la suppression du témoignage.
+  </div>
 </div>
 
 <div class="create-review">
@@ -20,9 +24,9 @@
     <tr *ngFor="let review of reviews">
       <td>{{ review.name }}</td>
       <td>{{ review.description }}</td>
-      <td>
+      <td class="buttons">
         <button (click)="redirectToUpdateReview(review.id)">Modifier</button>
-        <!--<app-button (btnClick)="DeleteReview()" text="Supprimer"></app-button>-->
+        <button (click)="deleteReview(review.id)">Supprimer</button>
       </td>
     </tr>
   </tbody>
