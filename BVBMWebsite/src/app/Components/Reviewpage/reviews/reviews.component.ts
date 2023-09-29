@@ -18,9 +18,9 @@ export class ReviewsComponent implements OnInit {
     this.router.navigate(['/create-review']);
   }
 
-  //redirectToUpdateReview(id: number) {
-  //  this.router.navigate([`/update/${id}`])
-  //}
+  redirectToUpdateReview(id: number) {
+    this.router.navigate([`/update-review/${id}`])
+  }
 
   ngOnInit(): void {
     this.reviewService.GetAllReviews().subscribe((result: Review[]) => (this.reviews = result));

@@ -12,6 +12,7 @@ export class ReviewService {
   private urlCreateReview = "Create"
   private urlUpdateReview = "Update"
   private urlDeleteReview = "Delete"
+  private urlReviewById = "id?id="
 
 
   constructor(private http: HttpClient) { }
@@ -24,11 +25,15 @@ export class ReviewService {
     return this.http.post(`${this.apiurl}/${this.urlCreateReview}`, review, { responseType: 'text' });
   }
 
-  public UdpateReview(reviewId: number): Observable<string> {
-    return this.http.put(`${this.apiurl}/${this.urlUpdateReview}/${reviewId}`, reviewId,  { responseType: 'text' });
+  public UdpateReview(reviewId: number, review: Review): Observable<string> {
+    return this.http.put(`${this.apiurl}/${this.urlUpdateReview}/${reviewId}`, review,  { responseType: 'text' });
   }
 
   public DeleteReview(reviewId: number): Observable<string> {
     return this.http.delete(`${this.apiurl}/${this.urlDeleteReview}/${reviewId}`, { responseType: 'text' });
+  }
+
+  public GetReviewbyId(reviewId: number): Observable<Review> {
+    return this.http.get<Review>(`${this.apiurl}/${this.urlReviewById}${reviewId}`);
   }
 }

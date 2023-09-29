@@ -83,3 +83,11 @@ input:focus, select:focus, textarea:focus {
   border-color: rgb(236, 235, 189) !important;
   background-color: inherit;
 }
+
+button {
+  border-radius: 30px;
+  padding: 0.5rem;
+  background-color: inherit;
+  border: 1px solid #444444;
+  box-shadow: 0px 1px 2px #444444;
+}

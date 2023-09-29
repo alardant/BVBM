@@ -6,6 +6,7 @@ import { ContactComponent } from './Components/contact/contact.component';
 import { HomeComponent } from './Components/Homepage/home/home.component';
 import { ReviewsComponent } from './Components/Reviewpage/reviews/reviews.component';
 import { CreateReviewComponent } from './Components/Reviewpage/create-review/create-review.component';
+import { UpdateReviewComponent } from './Components/Reviewpage/update-review/update-review.component';
 import { LoginComponent } from './Components/login/login.component';
 import { AuthGuard } from './Guard/auth.guard';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard] },
   { path: 'create-review', component: CreateReviewComponent, canActivate: [AuthGuard] },
+  { path: 'update-review/:id', component: UpdateReviewComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ];

@@ -21,8 +21,8 @@
       <td>{{ review.name }}</td>
       <td>{{ review.description }}</td>
       <td>
-        <!--<app-button (btnClick)="redirectToUpdateReview(review.id)" text="Modifier"></app-button>
-        <app-button (btnClick)="DeleteReview()" text="Supprimer"></app-button>-->
+        <button (click)="redirectToUpdateReview(review.id)">Modifier</button>
+        <!--<app-button (btnClick)="DeleteReview()" text="Supprimer"></app-button>-->
       </td>
     </tr>
   </tbody>

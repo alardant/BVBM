@@ -22,11 +22,17 @@ namespace BVBM.Controllers
 
         //Get all reviews
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Review>))]
         public async Task<IActionResult> getAllReviews()
         {
             var reviews = await _reviewRepository.GetAllReviewsAsync();
             return Ok(reviews);
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> getReviewbyId(int id)
+        {
+                var review = await _reviewRepository.GetReviewByIdAsync(id);
+                return Ok(review);
         }
 
         //Create a review
@@ -63,6 +69,7 @@ namespace BVBM.Controllers
 
 
         //Update a review
+        [Authorize]
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateReview(int id, [FromBody] ReviewDto reviewUpdate)
         {
@@ -93,6 +100,7 @@ namespace BVBM.Controllers
         }
 
         //Delete de Review
+        [Authorize]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteReview(int id)
         {

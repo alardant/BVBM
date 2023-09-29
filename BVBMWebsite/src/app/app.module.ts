@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './Interceptor/jwt.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { CreateReviewComponent } from './Components/Reviewpage/create-review/create-review.component';
+import { UpdateReviewComponent } from './Components/Reviewpage/update-review/update-review.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CreateReviewComponent } from './Components/Reviewpage/create-review/cre
     OffersOfferComponent,
     ReviewsComponent,
     LoginComponent,
-    CreateReviewComponent
+    CreateReviewComponent,
+    UpdateReviewComponent
   ],
   imports: [
     BrowserModule,
