@@ -1,1 +1,61 @@
-<p>contact works!</p>
+<div class="container">
+  <div *ngIf="responseMessage === 'success'" class="info-message">
+    Le formulaire a été envoyé avec succès !
+  </div>
+  <div *ngIf="responseMessage === 'fail'" class="info-message">
+    Une erreur s'est produite lors de l'envoie du formuaire, veuillez réessayer.
+  </div>
+</div>
+
+<section class="text container">
+  <h2>Me contacter</h2>
+  <p>
+    Une fois le formulaire de contact rempli, je reviendrai vers vous afin d’échanger sur vos besoins et vos problématiques.
+  </p>
+  <p>
+    Vous pouvez également me contacer au
+    <a href="tel:+33XXXX">XX.XX.XX.XX.XX.XX</a> ou par e-mail à l’adresse suivante :
+    <a href="mailto:bienvivrebienmanger@gmail.com">bienvivrebienmanger@gmail.com</a>
+  </p>
+</section>
+
+<section class="send-contact-container">
+  <div class="container">
+    <h2>Formulaire de contact</h2>
+    <form #reviewForm="ngForm">
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" id="name" name="name" class="form-control" [(ngModel)]="contact.name" required>
+        <div class="error-message" *ngIf="nameError">{{ nameError }}</div>
+      </div>
+      <div class="phone-email-div">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" class="form-control" [(ngModel)]="contact.email" required>
+          <div class="error-message" *ngIf="emailError">{{ emailError }}</div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="contact.phone" required>
+          <div class="error-message" *ngIf="phoneError">{{ phoneError }}</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="subject">Sujet</label>
+        <input type="text" id="subject" name="subject" class="form-control" [(ngModel)]="contact.subject" required>
+        <div class="error-message" *ngIf="subjectError">{{ subjectError }}</div>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" class="form-control" [(ngModel)]="contact.message" required rows="4"></textarea>
+        <div class="error-message" *ngIf="messageError">{{ messageError }}</div>
+      </div>
+      <div class="send-div">
+        <p>En soumettant ce formulaire, j’accepte que mes informations soient utilisées exclusivement dans le cadre de ma demande.</p>
+        <div class="form-group">
+          <app-button class="send-button" [buttonText]="'Envoyer'" (btnClick)="sendContactForm()"></app-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

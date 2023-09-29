@@ -91,3 +91,7 @@
   bottom: 1rem;
   font-style:italic;
 }
+
+button{
+    box-shadow:unset;
+}
