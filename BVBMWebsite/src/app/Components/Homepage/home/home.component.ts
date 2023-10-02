@@ -5,6 +5,7 @@ import { ReviewService } from '../../../Services/Review/review.service';
 import { Package } from '../../../Enum/packageEnum';
 import { UserService } from '../../../Services/User/user.service';
 import { ViewportScroller } from '@angular/common';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,12 @@ export class HomeComponent implements OnInit {
   reviews: Review[] = [];
   packages = Package;
 
-  constructor(private router: Router, private reviewService: ReviewService, private userService: UserService, private viewPortScroller: ViewportScroller) { }
+  constructor(private router: Router,
+    private reviewService: ReviewService,
+    private userService: UserService,
+    private viewPortScroller: ViewportScroller,
+    private titleService: Title,
+    private meta: Meta) { }
 
   redirectToContact() {
     this.router.navigate(['/contact']);
@@ -26,7 +32,11 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/offres-et-tarifs']);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.titleService.setTitle('Bien Vivre Bien Manger | Accompagnement en alimentation végétale');
+    this.meta.addTag({
+      name: 'description', content: 'Avec Bien Vivre Bien Manger, recevez des conseils presonnalisés pour un mode de vie sain et durable à travers alimentation végétale équilibrée.' });
+
     this.reviewService.GetAllReviews().subscribe((result: Review[]) => (this.reviews = result));
   }
 

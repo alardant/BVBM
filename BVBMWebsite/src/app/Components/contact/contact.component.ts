@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Contact } from '../../Models/contact';
 import { ContactService } from '../../Services/Contact/contact.service';
 import { ViewportScroller } from '@angular/common';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
   contact: Contact = new Contact();
   responseMessage: string = "";
   nameError: string = '';
@@ -21,7 +22,12 @@ export class ContactComponent {
   captchaError: string = '';
   isCaptchaResolved: boolean = false;
 
-  constructor(private contactService: ContactService, private viewportScroller: ViewportScroller) { }
+  constructor(private contactService: ContactService, private viewportScroller: ViewportScroller, private titleService: Title, private meta: Meta) { }
+
+  ngOnInit() {
+    this.titleService.setTitle('Bien Vivre Bien Manger | Contactez-nous');
+    this.meta.addTag({ name: 'description', content: 'Contactez-nous pour toutes questions ou demandes.' });
+  }
 
   sendContactForm() {
     console.log(this.isCaptchaResolved);
