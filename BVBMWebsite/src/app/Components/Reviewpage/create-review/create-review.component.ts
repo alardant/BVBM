@@ -50,8 +50,6 @@ export class CreateReviewComponent {
           this.responseMessage = 'success';
           this.router.navigate(['/create-review']);
           this.review = new Review();
-         this.viewportScroller.scrollToPosition([0, 0]);
-
         },
         (error: string) => {
           this.responseMessage = 'fail';

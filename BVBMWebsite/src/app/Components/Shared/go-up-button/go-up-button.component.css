@@ -1,0 +1,10 @@
+#scroll-top-button {
+  box-shadow: none;
+  float: right;
+  position: fixed;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 999;
+  opacity:0.8;
+}

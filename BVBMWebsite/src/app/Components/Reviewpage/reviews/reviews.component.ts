@@ -3,6 +3,7 @@ import { Review } from '../../../Models/review';
 import { ReviewService } from '../../../Services/Review/review.service';
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { Package } from '../../../Enum/packageEnum';
 
 @Component({
   selector: 'app-reviews',
@@ -47,4 +48,16 @@ export class ReviewsComponent implements OnInit {
     });
   }
 
+  getPackageName(packageValue: Package): string {
+    switch (packageValue) {
+      case Package.ConsultationIndividuelle:
+        return 'Consultation Individuelle';
+      case Package.Pack3mois:
+        return 'Pack 3 mois';
+      case Package.ConsultationDomicile:
+        return 'Consultation à domicile';
+      default:
+        return '';
+    }
+  }
 }

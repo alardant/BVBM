@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-offers',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class OffersComponent {
 
+  constructor(private router: Router) { }
+
+  redirectToContact() {
+    this.router.navigate(['/contact']);
+  }
 }

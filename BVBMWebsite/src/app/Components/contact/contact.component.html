@@ -24,7 +24,7 @@
     <h2>Formulaire de contact</h2>
     <form #reviewForm="ngForm">
       <div class="form-group">
-        <label for="name">Nom</label>
+        <label for="name">Nom et prénom</label>
         <input type="text" id="name" name="name" class="form-control" [(ngModel)]="contact.name" required (input)="nameError = ''">
         <div class="error-message" *ngIf="nameError">{{ nameError }}</div>
       </div>

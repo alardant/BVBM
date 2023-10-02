@@ -24,10 +24,10 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/contact"><h3>Contact</h3></a>
           </li>
-          <li class="nav-item" *ngIf="isLoggedIn">
+          <li class="nav-item ifLoggedIn" *ngIf="isLoggedIn">
             <a class="nav-link" routerLink="/reviews"><h3>Commentaires</h3></a>
           </li>
-          <li class="nav-item" *ngIf="isLoggedIn">
+          <li class="nav-item ifLoggedIn" *ngIf="isLoggedIn">
             <a class="nav-link" (click)="Logout()"><h3>Déconnexion</h3></a>
           </li>
         </ul>

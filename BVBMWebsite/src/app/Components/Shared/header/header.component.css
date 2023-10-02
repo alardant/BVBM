@@ -54,4 +54,7 @@
   padding: unset;
 }
 
+.ifLoggedIn {
+  border: 1px solid #444444;
+}
 

@@ -17,6 +17,7 @@
     <tr>
       <th>Nom</th>
       <th>Description</th>
+      <th>Type d'offre</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -24,6 +25,7 @@
     <tr *ngFor="let review of reviews">
       <td>{{ review.name }}</td>
       <td>{{ review.description }}</td>
+      <td>{{getPackageName(review.package)}}</td>
       <td class="buttons">
         <button (click)="redirectToUpdateReview(review.id)">Modifier</button>
         <button (click)="deleteReview(review.id)">Supprimer</button>

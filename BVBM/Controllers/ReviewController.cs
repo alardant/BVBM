@@ -24,15 +24,34 @@ namespace BVBM.Controllers
         [HttpGet]
         public async Task<IActionResult> getAllReviews()
         {
-            var reviews = await _reviewRepository.GetAllReviewsAsync();
-            return Ok(reviews);
+            try
+            {
+                var reviews = await _reviewRepository.GetAllReviewsAsync();
+                return Ok(reviews);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while fetching reviews.");
+            }
         }
 
         [HttpGet("id")]
         public async Task<IActionResult> getReviewbyId(int id)
         {
+            try
+            {
                 var review = await _reviewRepository.GetReviewByIdAsync(id);
+                if (review == null)
+                {
+                    return NotFound("Review not found.");
+                }
                 return Ok(review);
+            }
+            catch (Exception)
+            {
+                // Log the exception or handle it as needed
+                return StatusCode(500, "An error occurred while fetching the review.");
+            }
         }
 
         //Create a review
@@ -40,31 +59,37 @@ namespace BVBM.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> CreateReview([FromBody] ReviewDto reviewCreate)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Échec de la création du commentaire. Veuillez réessayer.");
-            }
-
             try
             {
-                var review = new Review
+                if (!ModelState.IsValid)
                 {
-                    Description = reviewCreate.Description,
-                    Name = reviewCreate.Name,
-                    CreatedDate = DateTime.Now,
-                    Package = reviewCreate.Package,
-                    UserId = _userRepository.GetFirstUser().Id
-                };
+                    return BadRequest("Échec de la création du commentaire. Veuillez réessayer.");
+                }
 
-                _reviewRepository.CreateReview(review);
+                try
+                {
+                    var review = new Review
+                    {
+                        Description = reviewCreate.Description,
+                        Name = reviewCreate.Name,
+                        CreatedDate = DateTime.Now,
+                        Package = reviewCreate.Package,
+                        UserId = _userRepository.GetFirstUser().Id
+                    };
+
+                    _reviewRepository.CreateReview(review);
+                }
+                catch (Exception)
+                {
+                    return BadRequest("Échec de la création du commentaire. Veuillez réessayer.");
+                }
+
+                return Ok("Le commentaire a bien été crée !");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest("Échec de la création du commentaire. Veuillez réessayer.");
+                return StatusCode(500, "An error occurred while creating the review.");
             }
-
-            return Ok("Le commentaire a bien été crée !");
         }
 
 
@@ -73,16 +98,16 @@ namespace BVBM.Controllers
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateReview(int id, [FromBody] ReviewDto reviewUpdate)
         {
+
             if (!_reviewRepository.ReviewExists(id) || reviewUpdate == null)
                 return NotFound("Échec de la modification du commentaire, le commentaire n'a pas été trouvé");
 
             if (!ModelState.IsValid)
                 return BadRequest("Échec de la modification du commentaire, veuillez réessayer.");
 
-            var review = await _reviewRepository.GetReviewByIdAsync(id);
-
             try
             {
+                var review = await _reviewRepository.GetReviewByIdAsync(id);
                 review.Description = reviewUpdate.Description;
                 review.Name = reviewUpdate.Name;
                 review.CreatedDate = DateTime.Now;
@@ -90,13 +115,13 @@ namespace BVBM.Controllers
                 review.UserId = _userRepository.GetFirstUser().Id;
 
                 _reviewRepository.UpdateReview(review);
+                return Ok("Le commentaire a bien été modifié !");
             }
             catch
             {
-                return BadRequest("Échec de la modification du commentaire. Veuillez réessayer.");
+                return StatusCode(500, "An error occurred while updating the review.");
             }
 
-            return Ok("Le commentaire a bien été modifié !");
         }
 
         //Delete de Review
@@ -109,23 +134,18 @@ namespace BVBM.Controllers
                 return NotFound("Échec de la suppression du commentaire, le commentaire n'a pas été trouvé");
             }
 
-            if (!ModelState.IsValid)
-            {
-                return NotFound("Échec de la suppression du commentaire, veuillez réessayer.");
-            }
-
-            var reviewToDelete = await _reviewRepository.GetReviewByIdAsync(id);
 
             try
             {
+                var reviewToDelete = await _reviewRepository.GetReviewByIdAsync(id);
                 _reviewRepository.DeleteReview(reviewToDelete);
+                return Ok("Le commentaire a bien été supprimé !");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return NotFound("Échec de la suppression du commentaire, veuillez réessayer.");
+                return StatusCode(500, "An error occurred while deleting the review.");
             }
 
-            return Ok("Le commentaire a bien été supprimé !");
 
         }
 

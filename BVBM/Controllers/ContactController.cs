@@ -25,7 +25,7 @@ namespace BVBM.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            string message = $"Prénom: {contactDto.Name}\n" +
+            string message = $"Nom: {contactDto.Name}\n" +
                             $"Email: {contactDto.Email}\n" +
                             $"Téléphone: {contactDto.Phone}\n" +
                             $"Sujet: {contactDto.Subject}\n" +
@@ -46,11 +46,11 @@ namespace BVBM.API.Controllers
                 smtpClient.Credentials = new System.Net.NetworkCredential(_config.GetSection("SmtpSettings:Username").Value, _config.GetSection("SmtpSettings:Password").Value); // SMTP ID
                 smtpClient.SendMailAsync(mail);
 
-                return Ok("E-mail envoyé avec succès.");
+                return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest($"Erreur lors de l'envoi de l'e-mail : {ex.Message}");
+                return StatusCode(500, "Failed to send the email. Please try again later.");
             }
         }
     }

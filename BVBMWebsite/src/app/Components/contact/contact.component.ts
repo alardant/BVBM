@@ -56,14 +56,18 @@ export class ContactComponent {
     // Vérifie s'il y a des erreurs avant de soumettre le formulaire
     if (!this.nameError && !this.emailError && !this.phoneError && !this.subjectError && !this.messageError && this.isCaptchaResolved == true) {
       // Soumets le formulaire
+      
       this.contactService.SendContactForm(this.contact).subscribe(
         (result: string) => {
+          console.log(result);
           this.responseMessage = 'success';
           this.contact = new Contact();
           this.viewportScroller.scrollToPosition([0, 0]);
 
         },
-        (error: string) => {
+        (error) => {
+          console.log(error);
+
           this.responseMessage = 'fail';
           this.viewportScroller.scrollToPosition([0, 0]);
         }

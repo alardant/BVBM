@@ -21,21 +21,28 @@ namespace BVBM.API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(UserDto userDto) 
+        public async Task<IActionResult> Login(UserDto userDto)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest("Échec de l'identification de l'utilisateur");
             }
 
-            var result = await _authService.Login(userDto);
-            if (result == true)
+            try
             {
-                var tokenString = await _authService.GenerateTokenString(userDto);
+                var result = await _authService.Login(userDto);
+                if (result == true)
+                {
+                    var tokenString = await _authService.GenerateTokenString(userDto);
 
-                return Ok(tokenString);
+                    return Ok(tokenString);
+                }
+                return BadRequest("Échec de l'identification de l'utilisateur");
             }
-            return BadRequest("Échec de l'identification de l'utilisateur");
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while processing the login request.");
+            }
         }
 
         [HttpGet("LoggedIn")]
@@ -49,8 +56,16 @@ namespace BVBM.API.Controllers
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            return Ok();
+            try
+            {
+                await _signInManager.SignOutAsync();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while processing the logout request.");
+            }
         }
     }
 }
+

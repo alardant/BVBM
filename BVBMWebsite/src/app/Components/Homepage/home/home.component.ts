@@ -4,6 +4,7 @@ import { Review } from '../../../Models/review';
 import { ReviewService } from '../../../Services/Review/review.service';
 import { Package } from '../../../Enum/packageEnum';
 import { UserService } from '../../../Services/User/user.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   reviews: Review[] = [];
   packages = Package;
 
-  constructor(private router: Router, private reviewService: ReviewService, private userService: UserService) { }
+  constructor(private router: Router, private reviewService: ReviewService, private userService: UserService, private viewPortScroller: ViewportScroller) { }
 
   redirectToContact() {
     this.router.navigate(['/contact']);
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
     this.reviewService.GetAllReviews().subscribe((result: Review[]) => (this.reviews = result));
   }
 
-   getPackageName(packageValue: Package): string {
+  getPackageName(packageValue: Package): string {
     switch (packageValue) {
       case Package.ConsultationIndividuelle:
         return 'Consultation Individuelle';

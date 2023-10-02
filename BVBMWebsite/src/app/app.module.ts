@@ -20,6 +20,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CreateReviewComponent } from './Components/Reviewpage/create-review/create-review.component';
 import { UpdateReviewComponent } from './Components/Reviewpage/update-review/update-review.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { GoUpButtonComponent } from './Components/Shared/go-up-button/go-up-button.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
     ReviewsComponent,
     LoginComponent,
     CreateReviewComponent,
-    UpdateReviewComponent
+    UpdateReviewComponent,
+    GoUpButtonComponent
   ],
   imports: [
     BrowserModule,
