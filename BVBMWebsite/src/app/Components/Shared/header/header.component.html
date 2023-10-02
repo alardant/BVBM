@@ -13,22 +13,22 @@
       <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-content-center">
         <ul class="navbar-nav flex-grow-1">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/"><h3>Accueil</h3></a>
+            <a class="nav-link" routerLink="/"><p>Accueil</p></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/a-propos"><h3>À propos</h3></a>
+            <a class="nav-link" routerLink="/a-propos"><p>À propos</p></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/offres-et-tarifs"><h3>Offres et tarifs</h3></a>
+            <a class="nav-link" routerLink="/offres-et-tarifs"><p>Offres et tarifs</p></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/contact"><h3>Contact</h3></a>
+            <a class="nav-link" routerLink="/contact"><p>Contact</p></a>
           </li>
           <li class="nav-item ifLoggedIn" *ngIf="isLoggedIn">
-            <a class="nav-link" routerLink="/reviews"><h3>Commentaires</h3></a>
+            <a class="nav-link" routerLink="/reviews"><p>Commentaires</p></a>
           </li>
           <li class="nav-item ifLoggedIn" *ngIf="isLoggedIn">
-            <a class="nav-link" (click)="Logout()"><h3>Déconnexion</h3></a>
+            <a class="nav-link" (click)="Logout()"><p>Déconnexion</p></a>
           </li>
         </ul>
       </div>
@@ -36,6 +36,6 @@
   </nav>
   <div class="imageHeaderContainer">
     <img class="imageHeader" src="./assets/images/header.jpg" alt="photo bandeau" />
-    <h1>Bien Vivre, Bien Manger</h1>
+    <h1>Bien Vivre Bien Manger</h1>
   </div>
 </header>

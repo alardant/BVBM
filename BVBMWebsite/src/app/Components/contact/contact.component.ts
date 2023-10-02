@@ -25,8 +25,8 @@ export class ContactComponent implements OnInit {
   constructor(private contactService: ContactService, private viewportScroller: ViewportScroller, private titleService: Title, private meta: Meta) { }
 
   ngOnInit() {
-    this.titleService.setTitle('Bien Vivre Bien Manger | Contactez-nous');
-    this.meta.addTag({ name: 'description', content: 'Contactez-nous pour toutes questions ou demandes.' });
+    this.titleService.setTitle('Bien Vivre Bien Manger | Contactez-moi');
+    this.meta.addTag({ name: 'description', content: 'Contactez-moi pour toutes questions ou demandes.' });
   }
 
   sendContactForm() {

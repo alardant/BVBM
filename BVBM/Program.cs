@@ -58,10 +58,6 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-// *** Seed the DB (to delete after delpoyment) ***
-builder.Services.AddTransient<Seed>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 
 
@@ -70,7 +66,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //deal with Cors
-//*** (to delete after deployment))
 builder.Services.AddCors(options => options.AddPolicy(name: "BVBMOrigins",
     policy =>
     {
@@ -79,22 +74,6 @@ builder.Services.AddCors(options => options.AddPolicy(name: "BVBMOrigins",
 
 var app = builder.Build();
 
-// *** Seed the DB (to delete after deployment) ***
-if (args.Length == 1 && args[0].ToLower() == "seeddata")
-    SeedData(app);
-
-void SeedData(IHost app)
-{
-    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
-
-    using (var scope = scopedFactory.CreateScope())
-    {
-        var service = scope.ServiceProvider.GetService<Seed>();
-        // Supprimer ces 
-        service.SeedDataContext().Wait();
-    }
-}
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -102,7 +81,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//*** to delete in prod env
 app.UseCors("BVBMOrigins");
 
 app.UseHttpsRedirection();

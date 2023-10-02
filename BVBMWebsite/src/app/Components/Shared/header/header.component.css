@@ -13,14 +13,31 @@
     text-align:center;
 }
 
-.container-fluid {
-  gap: 15%;
+
+.nav-link p{
+    font-size:18px;
+    padding-bottom:unset;
 }
 
+  .nav-link p:after {
+    content: '';
+    display: block;
+    border: 0.5px solid rgb(247, 204, 132);
+    width: 100%;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    opacity:0%
+  }
 
-.custom-toggler.navbar-toggler {
-  border-color: #F7CC84;
-}
+  .nav-link p:hover::after {
+    opacity: 100%;
+    transition: opacity 0.3s ease-in-out
+  }
+
+  .custom-toggler.navbar-toggler {
+    border-color: #F7CC84;
+  }
 
 @media (max-width: 575px) {
   .imageHeaderContainer {

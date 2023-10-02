@@ -20,7 +20,7 @@ footer {
     left: 0;
     right: 0;
     background: url('~/src/assets/images/footer.jpg');
-    opacity: .7;
+    opacity: .4;
     background-size: cover;
     background-position: center;
   }
@@ -37,4 +37,8 @@ footer {
 
 a {
   text-decoration: none;
+}
+
+.footer-open-hours p:first-of-type{
+    text-decoration:underline;
 }

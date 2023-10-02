@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 @font-face {
-  font-family: Nickainley;
-  src: url(assets/font/Nickainley-Normal.otf) format("opentype");
+  font-family: AbrilFataface;
+  src: url(assets/font/AbrilFatface-Regular.otf) format("opentype");
 }
 
 * {
@@ -27,14 +27,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Nickainley", sans-serif;
+  font-family: "AbrilFataface", sans-serif;
   padding: 2rem;
   margin-bottom: unset;
 }
 
 h2 {
   font-size: 26px;
-  font-weight: bold;
 }
 
 h3 {

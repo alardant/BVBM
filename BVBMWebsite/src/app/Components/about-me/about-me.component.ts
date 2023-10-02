@@ -12,11 +12,11 @@ export class AboutMeComponent implements OnInit {
 
   ngOnInit() {
     // Méta Titre
-    const metaTitle = "Bien Vivre Bien Manger | Mon Parcours et la Genèse du projet";
+    const metaTitle = "Bien Vivre Bien Manger | Mon parcours et la genèse du projet";
     this.titleService.setTitle(metaTitle);
 
     // Méta Description
-    const metaDescription = "Découvrez mon parcours personnel et les objectifs de Bien Vivre Bien Manger, axés sur une alimentation saine et éthique.";
+    const metaDescription = "Découvrez mon parcours personnel et les objectifs de Bien Vivre Bien Manger, axés sur une alimentation végétale saine et éthique.";
     this.meta.addTag({ name: 'description', content: metaDescription });
   }
 }

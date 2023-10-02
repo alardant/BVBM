@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Bien Vivre Bien Manger | Accompagnement en alimentation végétale');
     this.meta.addTag({
-      name: 'description', content: 'Avec Bien Vivre Bien Manger, recevez des conseils presonnalisés pour un mode de vie sain et durable à travers alimentation végétale équilibrée.' });
+      name: 'description', content: 'Avec Bien Vivre Bien Manger, recevez des conseils personnalisés pour un mode de vie sain et durable à travers alimentation végétale équilibrée.' });
 
     this.reviewService.GetAllReviews().subscribe((result: Review[]) => (this.reviews = result));
   }

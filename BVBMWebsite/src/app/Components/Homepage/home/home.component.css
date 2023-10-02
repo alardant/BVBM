@@ -7,8 +7,8 @@
 }
 
   .quote * {
-    font-weight: bold;
     padding:unset;
+    font-size:18px;
   }
 
   .quote>h2{
@@ -29,6 +29,14 @@
     width: 80%;
   }
 
+  .mission h2{
+      padding-bottom:1rem;
+  }
+
+  .mission p:last-of-type{
+      padding-bottom:2rem;
+  }
+
 .offers-container {
   text-align: center;
 }
@@ -40,7 +48,19 @@
 .free-call {
   border: 2px solid #ECEBBD;
   border-radius: 30px;
+  margin-bottom:2rem;
 }
+
+  .free-call p:first-of-type {
+    font-size: 18px;
+    padding: 1rem;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+
+  .free-call p:last-of-type{
+      padding-bottom:unset;
+  }
 
   .free-call h3 {
     font-weight: bold;
@@ -90,6 +110,10 @@
   right: 5%;
   bottom: 1rem;
   font-style:italic;
+}
+
+.see-all-reviews:hover{
+    transform:scale(1.03);
 }
 
 button{

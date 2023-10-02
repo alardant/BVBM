@@ -1,6 +1,9 @@
-.contact-me{
-    text-align:center;
-    padding-top:2rem;
+.contact-me {
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 16px;
+  background-color : #ECEBBD ;
+  margin-top: 2rem;
 }
 
 .contact-me p{
