@@ -9,12 +9,14 @@ import { CreateReviewComponent } from './Components/Reviewpage/create-review/cre
 import { UpdateReviewComponent } from './Components/Reviewpage/update-review/update-review.component';
 import { LoginComponent } from './Components/login/login.component';
 import { AuthGuard } from './Guard/auth.guard';
+import { CgdvComponent } from './Components/cgdv/cgdv.component';
 
 const routes: Routes = [
   { path: 'offres-et-tarifs', component: OffersComponent },
   { path: 'login', component: LoginComponent },
   { path: 'a-propos', component: AboutMeComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'cgdv', component: CgdvComponent },
   { path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard] },
   { path: 'create-review', component: CreateReviewComponent, canActivate: [AuthGuard] },
   { path: 'update-review/:id', component: UpdateReviewComponent, canActivate: [AuthGuard] },

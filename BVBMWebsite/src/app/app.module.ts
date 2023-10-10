@@ -21,6 +21,7 @@ import { CreateReviewComponent } from './Components/Reviewpage/create-review/cre
 import { UpdateReviewComponent } from './Components/Reviewpage/update-review/update-review.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { GoUpButtonComponent } from './Components/Shared/go-up-button/go-up-button.component';
+import { CgdvComponent } from './Components/cgdv/cgdv.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { GoUpButtonComponent } from './Components/Shared/go-up-button/go-up-butt
     LoginComponent,
     CreateReviewComponent,
     UpdateReviewComponent,
-    GoUpButtonComponent
+    GoUpButtonComponent,
+    CgdvComponent
   ],
   imports: [
     BrowserModule,

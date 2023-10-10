@@ -3,16 +3,16 @@
 }
 
 .quote {
-    padding:2rem;
+  padding: 2rem;
 }
 
   .quote * {
-    padding:unset;
-    font-size:18px;
+    padding: unset;
+    font-size: 18px;
   }
 
-  .quote>h2{
-      padding-bottom:1rem;
+  .quote > h2 {
+    padding-bottom: 1rem;
   }
 
 .mission-container {
@@ -29,26 +29,26 @@
     width: 80%;
   }
 
-  .mission h2{
-      padding-bottom:1rem;
+  .mission h2 {
+    padding-bottom: 1rem;
   }
 
-  .mission p:last-of-type{
-      padding-bottom:2rem;
+  .mission p:last-of-type {
+    padding-bottom: 2rem;
   }
 
 .offers-container {
   text-align: center;
 }
 
-.offers-container h2 {
-  font-weight: 400;
-}
+  .offers-container h2 {
+    font-weight: 400;
+  }
 
 .free-call {
   border: 2px solid #ECEBBD;
   border-radius: 30px;
-  margin-bottom:2rem;
+  margin-bottom: 2rem;
 }
 
   .free-call p:first-of-type {
@@ -58,8 +58,8 @@
     text-decoration: underline;
   }
 
-  .free-call p:last-of-type{
-      padding-bottom:unset;
+  .free-call p:last-of-type {
+    padding-bottom: unset;
   }
 
   .free-call h3 {
@@ -68,27 +68,38 @@
 
 .offers-card-container {
   display: grid;
-  align-items:stretch !important;
-  grid-template-columns:repeat(3, 1fr);
-  gap:2%;
+  align-items: stretch !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2%;
+}
+
+.google-reviews {
+  text-decoration: underline;
+  position: absolute;
+  right: 5%;
+  bottom: 1rem;
+  font-style: italic;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 @media (max-width: 767px) {
   .offers-card-container {
     grid-template-columns: 1fr;
-    gap:2rem;
+    gap: 2rem;
   }
 }
 
 .reviews-container {
   background-color: #F8F1E4;
-  text-align:center;
-  position:relative;
-  padding-bottom:1rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
 }
 
-.carousel p{
-    margin-top:1rem;
+.carousel p {
+  margin-top: 1rem;
 }
 
 .bi-arrow-left, .bi-arrow-right {
@@ -104,18 +115,10 @@
   opacity: 0.8;
 }
 
-.see-all-reviews {
-  text-decoration: underline;
-  position: absolute;
-  right: 5%;
-  bottom: 1rem;
-  font-style:italic;
-}
+  .see-all-reviews:hover {
+    transform: scale(1.03);
+  }
 
-.see-all-reviews:hover{
-    transform:scale(1.03);
-}
-
-button{
-    box-shadow:unset;
+button {
+  box-shadow: unset;
 }
