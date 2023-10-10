@@ -13,6 +13,7 @@ export class OffersOfferComponent {
   @Input() description!: string;
   @Input() price!: string;
   @Input() backgroundColor!: string;
+  @Input() reverse: boolean = false;
 
   ngOnInit() { }
 }

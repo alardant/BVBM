@@ -9,15 +9,32 @@ section{
 .offer-body {
   display: grid;
   grid-template-columns:1fr 1fr;
+  grid-template-areas:"img text";
   align-items: center;
   gap: 2rem;
 }
 
+
+.reverse .offer-body {
+  grid-template-areas: "text img";
+}
+
 @media (max-width: 767px){
-  .offer-body {
+  .offer-body, .reverse .offer-body {
     grid-template-columns: 1fr;
+    grid-template-areas:
+        "img"
+        "text";
     gap:unset;
   }
+}
+
+.offer-image-summary {
+  grid-area: img;
+}
+
+.offer-description-price {
+  grid-area: text;
 }
 
 .offer-img-container {
@@ -47,5 +64,6 @@ section{
   font-weight: bold;
   margin: 0 auto;
 }
+
 
 
