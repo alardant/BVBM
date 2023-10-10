@@ -84,6 +84,10 @@
   gap: 5px;
 }
 
+.google-reviews img{
+    height:5rem;
+}
+
 @media (max-width: 767px) {
   .offers-card-container {
     grid-template-columns: 1fr;

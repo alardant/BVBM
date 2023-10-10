@@ -32,6 +32,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/offres-et-tarifs']);
   }
 
+  createReview(url: string) {
+    window.open(url, '_blank');
+  }
+
   ngOnInit() {
     this.titleService.setTitle('Bien Vivre Bien Manger | Accompagnement en alimentation végétale');
     this.meta.addTag({

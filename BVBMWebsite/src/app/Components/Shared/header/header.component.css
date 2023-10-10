@@ -6,7 +6,11 @@
 
 .navbar {
   min-height: 50px;
-  margin-top: 1rem;
+}
+
+.logo{
+    height:6rem;
+    margin-left:2rem;
 }
 
 .nav-link{
@@ -35,8 +39,12 @@
     transition: opacity 0.3s ease-in-out
   }
 
-  .custom-toggler.navbar-toggler {
-    border-color: #F7CC84;
+.custom-toggler.navbar-toggler {
+  border-color: #618264;
+}
+
+  .navbar-toggler{
+      margin-right:2rem;
   }
 
 @media (max-width: 575px) {
@@ -46,7 +54,7 @@
 }
 
 .imageHeaderContainer {
-  height: 160px;
+  height: 100px;
   width: 100%;
   position: relative;
 }
@@ -63,7 +71,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 7vw;
+  font-size: 5vh;
   white-space: nowrap;
 }
 

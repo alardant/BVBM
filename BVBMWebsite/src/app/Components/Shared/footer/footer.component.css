@@ -42,3 +42,9 @@ a {
 .footer-open-hours p:first-of-type{
     text-decoration:underline;
 }
+
+
+.logo-insta {
+  height: 20px;
+  margin-bottom: 1rem
+}
