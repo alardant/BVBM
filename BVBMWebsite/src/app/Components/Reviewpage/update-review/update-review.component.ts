@@ -16,7 +16,6 @@ export class UpdateReviewComponent implements OnInit {
   responseMessage: string = "";
   packageValues: Package[] = Object.values(Package).filter(value => typeof value === 'number') as Package[];
   nameError: string = '';
-  packageError: string = '';
   descriptionError: string = '';
 
   constructor(private reviewService: ReviewService, private hhtp: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private viewportScroller: ViewportScroller) {
@@ -41,22 +40,18 @@ export class UpdateReviewComponent implements OnInit {
   updateReview() {
     // Réinitialise les messages d'erreur avant chaque soumission
     this.nameError = '';
-    this.packageError = '';
     this.descriptionError = '';
 
     // Valide des champs et affichage des messages d'erreur si nécessaire
     if (!this.review.name) {
       this.nameError = 'Le champ Nom est requis.';
     }
-    if (!this.review.package) {
-      this.packageError = 'Le champ Package est requis.';
-    }
     if (!this.review.description) {
       this.descriptionError = 'Le champ Description est requis.';
     }
 
     // Vérifie s'il y a des erreurs avant de soumettre le formulaire
-    if (!this.nameError && !this.packageError && !this.descriptionError) {
+    if (!this.nameError && !this.descriptionError) {
       // Soumets le formulaire
       this.reviewService.UdpateReview(this.review.id, this.review).subscribe(
         (result: string) => {

@@ -16,7 +16,6 @@ export class CreateReviewComponent {
   responseMessage: string = "";
   packageValues: Package[] = Object.values(Package).filter(value => typeof value === 'number') as Package[];
   nameError: string = '';
-  packageError: string = '';
   descriptionError: string = '';
 
   constructor(private router: Router, private reviewService: ReviewService, private viewportScroller: ViewportScroller) {}
@@ -28,22 +27,18 @@ export class CreateReviewComponent {
   createReview() {
     // Réinitialise les messages d'erreur avant chaque soumission
     this.nameError = '';
-    this.packageError = '';
     this.descriptionError = '';
 
     // Valide des champs et affichage des messages d'erreur si nécessaire
     if (!this.review.name) {
       this.nameError = 'Le champ Nom est requis.';
     }
-    if (!this.review.package) {
-      this.packageError = 'Le champ Package est requis.';
-    }
     if (!this.review.description) {
       this.descriptionError = 'Le champ Description est requis.';
     }
 
     // Vérifie s'il y a des erreurs avant de soumettre le formulaire
-    if (!this.nameError && !this.packageError && !this.descriptionError) {
+    if (!this.nameError && !this.descriptionError) {
       // Soumets le formulaire
       this.reviewService.CreateReview(this.review).subscribe(
         (result: string) => {
