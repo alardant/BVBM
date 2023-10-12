@@ -34,8 +34,8 @@ namespace BVBM.API.Controllers
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress(_config.GetSection("SmtpSettings:Username").Value);
-                mail.To.Add(_config.GetSection("SmtpSettings:Username").Value);
+                mail.From = new MailAddress(_config["smtpUsername"]);
+                mail.To.Add(_config["smtpUsername"]);
                 mail.Subject = "Nouveau message de contact - " + contactDto.Subject;
                 mail.Body = message;
 
@@ -43,7 +43,7 @@ namespace BVBM.API.Controllers
                 SmtpClient smtpClient = new SmtpClient(_config.GetSection("SmtpSettings:Server").Value, int.Parse(_config.GetSection("SmtpSettings:Port").Value));
                 smtpClient.EnableSsl = true;
                 //A modifier
-                smtpClient.Credentials = new System.Net.NetworkCredential(_config.GetSection("SmtpSettings:Username").Value, _config.GetSection("SmtpSettings:Password").Value); // SMTP ID
+                smtpClient.Credentials = new System.Net.NetworkCredential(_config["smtpUsername"], _config["smtpPassword"]); // SMTP ID
                 smtpClient.SendMailAsync(mail);
 
                 return Ok();
