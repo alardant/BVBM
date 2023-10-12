@@ -70,7 +70,7 @@
   display: grid;
   align-items: stretch !important;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2%;
+  gap: 4%;
 }
 
 .google-reviews {
@@ -106,14 +106,6 @@
   margin-top: 1rem;
 }
 
-.carousel-item {
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  padding: 0 12%;
-  align-items: center;
-}
-
 .bi-arrow-left, .bi-arrow-right {
   display: flex;
   flex-wrap: wrap;
@@ -133,4 +125,11 @@
 
 button {
   box-shadow: unset;
+}
+
+.reviews-container q {
+  margin-left: 12%;
+  padding-right: 12%;
+  display: block;
+  text-align: center;
 }

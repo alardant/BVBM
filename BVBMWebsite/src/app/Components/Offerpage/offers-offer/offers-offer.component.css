@@ -8,7 +8,7 @@ section{
 
 .offer-body {
   display: grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr 2fr;
   grid-template-areas:"img text";
   align-items: center;
   gap: 2rem;
@@ -16,6 +16,7 @@ section{
 
 
 .reverse .offer-body {
+  grid-template-columns: 2fr 1fr;
   grid-template-areas: "text img";
 }
 
@@ -38,7 +39,7 @@ section{
 }
 
 .offer-img-container {
-  height: 280px;
+  height: 300px;
   width: auto;
   background-size: cover;
   margin: 2rem 0;
@@ -65,5 +66,9 @@ section{
   margin: 0 auto;
 }
 
+.discount{
+    margin-top:2rem;
+    padding:unset;
+}
 
 

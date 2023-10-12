@@ -12,6 +12,7 @@ export class OffersOfferComponent {
   @Input() summary!: string;
   @Input() description!: string;
   @Input() price!: string;
+  @Input() discount: string ="";
   @Input() backgroundColor!: string;
   @Input() reverse: boolean = false;
 
