@@ -1,4 +1,7 @@
-﻿using BVBM.API.Data;
+﻿using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using BVBM.API.Data;
 using BVBM.API.Dto;
 using BVBM.API.Interface;
 using Microsoft.AspNetCore.Identity;
@@ -17,11 +20,23 @@ namespace BVBM.API.Services
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _config;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly SecretClient _secretClient;
         public AuthService(UserManager<IdentityUser> userManager, IConfiguration configuration, DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _config = configuration;
             _httpContextAccessor = httpContextAccessor;
+
+            // Initialize the SecretClient
+            var keyVaultName = _config["KeyVault:KeyVaultName"];
+            var keyVaultUri = new Uri($"https://{keyVaultName}.vault.azure.net");
+            var credential = new ClientSecretCredential(
+                _config["KeyVault:DirectoryID"],
+                _config["KeyVault:ClientId"],
+                _config["KeyVault:ClientSecret"]
+            );
+
+            _secretClient = new SecretClient(keyVaultUri, credential);
         }
 
         // Check the credential of the user upon Login
@@ -48,7 +63,7 @@ namespace BVBM.API.Services
                 new Claim(ClaimTypes.Email,userDto.Email)
             };
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretClient.GetSecret("JwtKey").Value.Value.ToString()));
 
             //Create the credential to sign the token
             var signingCred = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);

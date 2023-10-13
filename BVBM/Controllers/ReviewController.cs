@@ -21,6 +21,7 @@ namespace BVBM.Controllers
         }
 
         //Get all reviews
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> getAllReviews()
         {

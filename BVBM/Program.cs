@@ -34,7 +34,7 @@ var client = new SecretClient(keyVaultUri, credential);
 
 // Set Connection to DB in prod
 
-if (builder.Environment.IsProduction())
+if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<DataContext>(options =>
     {
