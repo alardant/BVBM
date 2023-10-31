@@ -8,7 +8,10 @@ using BVBM.API.Services;
 using BVBM.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -19,22 +22,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 //Add Client from Azure Key Vault
-var keyVaultName = builder.Configuration["KeyVault:KeyVaultName"];
-var keyVaultUri = new Uri($"https://{keyVaultName}.vault.azure.net");
-var credential = new ClientSecretCredential(
-    builder.Configuration["KeyVault:DirectoryID"],
-    builder.Configuration["KeyVault:ClientId"],
-    builder.Configuration["KeyVault:ClientSecret"]
-);
+var keyVaultUrl = builder.Configuration["KeyVault:KeyVaultUrl"];
 
-builder.Configuration.AddAzureKeyVault(keyVaultUri, credential, new KeyVaultSecretManager());
+var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
-var client = new SecretClient(keyVaultUri, credential);
+builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultKeyVaultSecretManager());
 
+var client = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
 
 // Set Connection to DB in prod
 
-if (builder.Environment.IsDevelopment())
+if (builder.Environment.IsProduction())
 {
     builder.Services.AddDbContext<DataContext>(options =>
     {
