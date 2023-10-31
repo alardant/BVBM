@@ -30,8 +30,6 @@ export class ContactComponent implements OnInit {
   }
 
   sendContactForm() {
-    console.log(this.isCaptchaResolved);
-
     // Réinitialise les messages d'erreur avant chaque soumission
     this.nameError = '';
     this.emailError = '';
@@ -65,15 +63,12 @@ export class ContactComponent implements OnInit {
       
       this.contactService.SendContactForm(this.contact).subscribe(
         (result: string) => {
-          console.log(result);
           this.responseMessage = 'success';
           this.contact = new Contact();
           this.viewportScroller.scrollToPosition([0, 0]);
 
         },
         (error) => {
-          console.log(error);
-
           this.responseMessage = 'fail';
           this.viewportScroller.scrollToPosition([0, 0]);
         }
